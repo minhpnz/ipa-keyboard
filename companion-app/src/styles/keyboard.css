@@ -1,0 +1,269 @@
+/* Virtual Keyboard Layout */
+.virtual-keyboard {
+  margin-top: 12px;
+  padding: 8px;
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+/* Navigation tabs */
+.keyboard-nav {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 0 8px;
+  border-bottom: 1px solid var(--border-light);
+  margin-bottom: 8px;
+}
+
+.keyboard-nav-label {
+  font-size: 13px;
+  color: var(--text-secondary);
+  margin-right: 4px;
+}
+
+.nav-btn {
+  padding: 4px 12px;
+  border: none;
+  border-bottom: 2px solid transparent;
+  background: none;
+  color: var(--text-secondary);
+  font-size: 13px;
+  cursor: pointer;
+  text-transform: capitalize;
+}
+
+.nav-btn:hover {
+  color: var(--accent);
+}
+
+.nav-btn.active {
+  color: var(--accent);
+  border-bottom-color: var(--accent);
+  font-weight: 600;
+}
+
+/* Letter groups grid — compact layout */
+.keyboard-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 3px;
+  padding: 2px 0;
+  overflow-x: auto;
+}
+
+.symbol-group {
+  display: flex;
+  align-items: center;
+  gap: 1px;
+  padding: 2px 3px;
+  background: var(--bg-primary);
+  border: 1px solid var(--border-light);
+  border-radius: 4px;
+}
+
+.symbol-group-trigger {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  background: var(--accent-orange);
+  color: #fff;
+  border-radius: 50%;
+  font-size: 12px;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+/* Symbol buttons */
+.symbol-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 28px;
+  height: 28px;
+  padding: 0 4px;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  background: var(--symbol-btn-bg);
+  color: var(--text-primary);
+  font-family: "Segoe UI", "Lucida Grande", Arial, sans-serif;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background 0.12s, border-color 0.12s, transform 0.1s;
+}
+
+.symbol-btn:hover {
+  background: var(--symbol-btn-hover);
+  border-color: var(--accent-orange);
+  transform: scale(1.05);
+}
+
+.symbol-btn:active {
+  background: var(--symbol-btn-active);
+  transform: scale(0.97);
+}
+
+/* Phonetic Chart */
+.phonetic-chart {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.chart-section {
+  border: 2px solid var(--accent-orange);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.chart-section-header {
+  background: var(--accent-orange);
+  padding: 6px 12px;
+}
+
+.chart-section-label {
+  color: #fff;
+  font-size: 14px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.chart-subsection {
+  padding: 8px;
+  border-bottom: 1px solid var(--border-light);
+}
+
+.chart-subsection:last-child {
+  border-bottom: none;
+}
+
+.chart-subsection-label {
+  display: block;
+  font-size: 11px;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+}
+
+.phonetic-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
+  gap: 4px;
+}
+
+.phonetic-cell {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  padding: 8px 4px 6px;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  background: var(--bg-primary);
+  cursor: pointer;
+  transition: background 0.12s, border-color 0.12s, transform 0.1s;
+  font-family: "Segoe UI", "Lucida Grande", Arial, sans-serif;
+}
+
+.phonetic-cell:hover {
+  background: var(--accent-orange-bg);
+  border-color: var(--accent-orange);
+  transform: scale(1.03);
+}
+
+.phonetic-cell:active {
+  background: var(--symbol-btn-active);
+  transform: scale(0.97);
+}
+
+.phonetic-number {
+  position: absolute;
+  top: 2px;
+  left: 4px;
+  font-size: 9px;
+  color: var(--text-secondary);
+  font-weight: 600;
+}
+
+.phonetic-symbol {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--text-primary);
+  line-height: 1.2;
+}
+
+.phonetic-example {
+  font-size: 11px;
+  color: var(--text-secondary);
+  text-decoration: underline;
+  text-decoration-color: var(--border-color);
+}
+
+/* Search */
+.symbol-search {
+  margin-bottom: 8px;
+}
+
+.search-input {
+  width: 100%;
+  padding: 6px 12px;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  font-size: 14px;
+  outline: none;
+  box-sizing: border-box;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+}
+
+.search-input:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.2);
+}
+
+.search-results {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin-top: 6px;
+  padding: 6px;
+  background: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  max-height: 240px;
+  overflow-y: auto;
+}
+
+.search-result-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  min-width: unset;
+  height: auto;
+  padding: 4px 8px;
+  text-align: left;
+  font-size: 14px;
+}
+
+.search-result-btn .search-symbol {
+  font-size: 20px;
+  min-width: 32px;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.search-result-btn .search-name {
+  font-size: 12px;
+  color: var(--text-secondary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

@@ -1,0 +1,167 @@
+{
+  "vowels": {
+    "monophthongs": [
+      { "symbol": "iː", "example": "Sheep", "number": 1 },
+      { "symbol": "ɪ", "example": "Ship", "number": 2 },
+      { "symbol": "ʊ", "example": "Good", "number": 3 },
+      { "symbol": "uː", "example": "Shoot", "number": 4 },
+      { "symbol": "e", "example": "Bed", "number": 7 },
+      { "symbol": "ə", "example": "Teacher", "number": 8 },
+      { "symbol": "ɜː", "example": "Bird", "number": 9 },
+      { "symbol": "ɔː", "example": "Door", "number": 10 },
+      { "symbol": "æ", "example": "Cat", "number": 14 },
+      { "symbol": "ʌ", "example": "Up", "number": 15 },
+      { "symbol": "ɑː", "example": "Far", "number": 16 },
+      { "symbol": "ɒ", "example": "On", "number": 17 }
+    ],
+    "diphthongs": [
+      { "symbol": "ɪə", "example": "Here", "number": 5 },
+      { "symbol": "eɪ", "example": "Wait", "number": 6 },
+      { "symbol": "ʊə", "example": "Tourist", "number": 11 },
+      { "symbol": "ɔɪ", "example": "Boy", "number": 12 },
+      { "symbol": "əʊ", "example": "Show", "number": 13 },
+      { "symbol": "eə", "example": "Hair", "number": 18 },
+      { "symbol": "aɪ", "example": "My", "number": 19 },
+      { "symbol": "aʊ", "example": "Cow", "number": 20 }
+    ]
+  },
+  "consonants": {
+    "plosives": [
+      { "symbol": "p", "example": "Pea", "number": 21 },
+      { "symbol": "b", "example": "Boat", "number": 22 },
+      { "symbol": "t", "example": "Tea", "number": 23 },
+      { "symbol": "d", "example": "Dog", "number": 24 },
+      { "symbol": "k", "example": "Car", "number": 27 },
+      { "symbol": "g", "example": "Go", "number": 28 }
+    ],
+    "affricates": [
+      { "symbol": "tʃ", "example": "Cheese", "number": 25 },
+      { "symbol": "dʒ", "example": "June", "number": 26 }
+    ],
+    "fricatives": [
+      { "symbol": "f", "example": "Fly", "number": 29 },
+      { "symbol": "v", "example": "Video", "number": 30 },
+      { "symbol": "θ", "example": "Think", "number": 31 },
+      { "symbol": "ð", "example": "This", "number": 32 },
+      { "symbol": "s", "example": "See", "number": 33 },
+      { "symbol": "z", "example": "Zoo", "number": 34 },
+      { "symbol": "ʃ", "example": "Shall", "number": 35 },
+      { "symbol": "ʒ", "example": "Television", "number": 36 }
+    ],
+    "nasals": [
+      { "symbol": "m", "example": "Man", "number": 37 },
+      { "symbol": "n", "example": "Now", "number": 38 },
+      { "symbol": "ŋ", "example": "Sing", "number": 39 }
+    ],
+    "other": [
+      { "symbol": "h", "example": "Hat", "number": 40 },
+      { "symbol": "l", "example": "Love", "number": 41 },
+      { "symbol": "r", "example": "Red", "number": 42 },
+      { "symbol": "w", "example": "Wet", "number": 43 },
+      { "symbol": "j", "example": "Yes", "number": 44 }
+    ]
+  },
+  "letterGroups": {
+    "A": ["æ", "ʌ", "ɑː"],
+    "E": ["ə", "ɜː"],
+    "I": ["ɪ", "iː"],
+    "O": ["ɒ", "ɔː"],
+    "U": ["ʊ", "uː"],
+    "T": ["θ", "ð"],
+    "S": ["ʃ"],
+    "D": ["dʒ"],
+    "C": ["tʃ"],
+    "N": ["ŋ"],
+    "Z": ["ʒ"]
+  },
+  "diacritics": {
+    "tones": {
+      "label": "Tone marks",
+      "symbols": ["˥", "˦", "˧", "˨", "˩", "̋", "́", "̄", "̀", "̏"]
+    },
+    "length": {
+      "label": "Length",
+      "symbols": ["ː", "ˑ"]
+    },
+    "stress": {
+      "label": "Stress",
+      "symbols": ["ˈ", "ˌ"]
+    },
+    "voicing": {
+      "label": "Voicing",
+      "symbols": ["̥", "̬"]
+    },
+    "aspiration": {
+      "label": "Aspiration / Secondary",
+      "symbols": ["ʰ", "ʷ", "ʲ", "ˠ", "ˤ", "ⁿ", "ˡ"]
+    },
+    "nasalization": {
+      "label": "Nasalization",
+      "symbols": ["̃"]
+    },
+    "rhoticity": {
+      "label": "Rhoticity",
+      "symbols": ["˞"]
+    },
+    "syllabicity": {
+      "label": "Syllabicity",
+      "symbols": ["̩", "̯"]
+    },
+    "dental": {
+      "label": "Dental / Apical / Laminal",
+      "symbols": ["̪", "̺", "̻"]
+    },
+    "tongue_root": {
+      "label": "Tongue root",
+      "symbols": ["̘", "̙"]
+    },
+    "centralized": {
+      "label": "Centralized / Mid-centralized",
+      "symbols": ["̈", "̽"]
+    },
+    "raised_lowered": {
+      "label": "Raised / Lowered",
+      "symbols": ["̝", "̞"]
+    },
+    "advanced_retracted": {
+      "label": "Advanced / Retracted",
+      "symbols": ["̟", "̠"]
+    },
+    "release": {
+      "label": "Release",
+      "symbols": ["̚"]
+    }
+  },
+  "suprasegmentals": {
+    "boundaries": {
+      "label": "Boundaries",
+      "symbols": ["|", "‖", "∅", "→"]
+    },
+    "linking": {
+      "label": "Linking",
+      "symbols": ["‿"]
+    },
+    "intonation": {
+      "label": "Intonation",
+      "symbols": ["↗", "↘", "↑", "↓"]
+    }
+  },
+  "other": {
+    "clicks": {
+      "label": "Clicks",
+      "symbols": ["ʘ", "ǀ", "ǃ", "ǂ", "ǁ"]
+    },
+    "implosives": {
+      "label": "Implosives",
+      "symbols": ["ɓ", "ɗ", "ʄ", "ɠ", "ʛ"]
+    },
+    "ejectives": {
+      "label": "Ejectives",
+      "symbols": ["pʼ", "tʼ", "kʼ", "sʼ"]
+    },
+    "misc": {
+      "label": "Miscellaneous",
+      "symbols": ["ʍ", "ɕ", "ʑ", "ɺ", "ɧ", "ʜ", "ʢ"]
+    }
+  }
+}

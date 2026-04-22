@@ -1,0 +1,40 @@
+.floating-container {
+  padding: 0;
+  background: var(--bg-tertiary);
+  min-height: 100vh;
+}
+
+.floating-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 6px 12px;
+  background: var(--header-bg);
+  color: #fff;
+}
+
+.floating-title {
+  font-size: 13px;
+  font-weight: 600;
+}
+
+/* Pin button in floating window header (dark background) */
+.floating-header .pin-btn {
+  padding: 3px 10px;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.15);
+  color: #fff;
+  font-size: 11px;
+  cursor: pointer;
+  transition: background 0.12s;
+}
+
+.floating-header .pin-btn:hover {
+  background: rgba(255, 255, 255, 0.25);
+}
+
+.floating-header .pin-btn.pinned {
+  background: rgba(255, 255, 255, 0.3);
+  border-color: rgba(255, 255, 255, 0.6);
+}

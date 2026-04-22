@@ -1,0 +1,50 @@
+.candidate-popup {
+  position: absolute;
+  z-index: 200;
+  display: flex;
+  flex-direction: column;
+  min-width: 60px;
+  background: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+  padding: 4px;
+  margin-top: 4px;
+}
+
+.candidate-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border: none;
+  border-radius: 4px;
+  background: none;
+  cursor: pointer;
+  transition: background 0.08s;
+  text-align: left;
+  font-family: "Segoe UI", "Lucida Grande", Arial, sans-serif;
+  color: var(--text-primary);
+}
+
+.candidate-item:hover,
+.candidate-item.selected {
+  background: var(--accent-orange-bg);
+}
+
+.candidate-item.selected {
+  outline: 2px solid var(--accent-orange);
+  outline-offset: -2px;
+}
+
+.candidate-number {
+  font-size: 10px;
+  color: var(--text-secondary);
+  min-width: 12px;
+  text-align: center;
+}
+
+.candidate-symbol {
+  font-size: 22px;
+  color: var(--text-primary);
+}

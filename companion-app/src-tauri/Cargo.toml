@@ -1,0 +1,24 @@
+[package]
+name = "ipa-keyboard"
+version = "0.1.0"
+description = "IPA Keyboard - International Phonetic Alphabet typing tool"
+authors = ["minhphan"]
+edition = "2021"
+
+[lib]
+name = "ipa_keyboard_lib"
+crate-type = ["staticlib", "cdylib", "rlib"]
+
+[build-dependencies]
+tauri-build = { version = "2", features = [] }
+
+[dependencies]
+tauri = { version = "2", features = ["tray-icon", "image-png"] }
+tauri-plugin-opener = "2"
+tauri-plugin-dialog = "2"
+tauri-plugin-fs = "2"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+ipa-mapping-engine = { path = "../../ime-core/shared" }
+ipa-keyboard-daemon = { path = "../../ime-core/macos" }
+libc = "0.2"

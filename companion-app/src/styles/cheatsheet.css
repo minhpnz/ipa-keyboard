@@ -1,0 +1,126 @@
+.cheatsheet-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  animation: fadeIn 0.15s ease;
+}
+
+.cheatsheet-modal {
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  border-radius: 12px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  width: 520px;
+  max-width: 90vw;
+  max-height: 80vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.cheatsheet-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.cheatsheet-header h2 {
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.cheatsheet-close {
+  width: 32px;
+  height: 32px;
+  border: none;
+  background: none;
+  font-size: 24px;
+  color: var(--text-secondary);
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.cheatsheet-close:hover {
+  background: var(--bg-hover);
+}
+
+.cheatsheet-body {
+  padding: 16px 20px;
+  overflow-y: auto;
+}
+
+.cheatsheet-section {
+  margin-bottom: 20px;
+}
+
+.cheatsheet-section:last-child {
+  margin-bottom: 0;
+}
+
+.cheatsheet-section h3 {
+  font-size: 14px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--text-secondary);
+  margin-bottom: 8px;
+}
+
+.cheatsheet-hint {
+  font-size: 13px;
+  color: var(--text-secondary);
+  margin-bottom: 8px;
+}
+
+.cheatsheet-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.cheatsheet-table tr {
+  border-bottom: 1px solid var(--border-color);
+}
+
+.cheatsheet-table tr:last-child {
+  border-bottom: none;
+}
+
+.cheatsheet-keys {
+  padding: 8px 12px 8px 0;
+  white-space: nowrap;
+  width: 1%;
+}
+
+.cheatsheet-keys kbd {
+  display: inline-block;
+  padding: 2px 8px;
+  font-size: 12px;
+  font-family: monospace;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  box-shadow: 0 1px 0 var(--border-color);
+}
+
+.cheatsheet-desc {
+  padding: 8px 0;
+  font-size: 14px;
+  color: var(--text-primary);
+}
+
+.seq-symbol {
+  font-size: 18px;
+  font-weight: 700;
+  margin-right: 4px;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}

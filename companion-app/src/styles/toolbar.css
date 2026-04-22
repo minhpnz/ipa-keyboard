@@ -1,0 +1,53 @@
+.toolbar {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 6px 8px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-bottom: none;
+  border-radius: 6px 6px 0 0;
+}
+
+.toolbar-group {
+  display: flex;
+  gap: 2px;
+  padding-right: 8px;
+  border-right: 1px solid var(--border-color);
+}
+
+.toolbar-group:last-child {
+  border-right: none;
+  padding-right: 0;
+  padding-left: 4px;
+}
+
+.toolbar-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 32px;
+  height: 30px;
+  padding: 0 6px;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  font-size: 14px;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s;
+}
+
+.toolbar-btn:hover {
+  background: var(--bg-hover);
+  border-color: var(--border-color);
+}
+
+.toolbar-btn:active {
+  background: var(--bg-secondary);
+}
+
+.action-btn {
+  font-size: 13px;
+  padding: 0 12px;
+}

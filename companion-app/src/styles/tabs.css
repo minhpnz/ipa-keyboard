@@ -1,0 +1,156 @@
+.doc-tabs-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 8px;
+  padding: 4px 0;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.doc-tabs {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  overflow-x: auto;
+  flex: 1;
+}
+
+.doc-tab {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 10px;
+  border: 1px solid var(--border-color);
+  border-bottom: none;
+  border-radius: 6px 6px 0 0;
+  background: var(--bg-hover);
+  font-size: 13px;
+  color: var(--text-secondary);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.12s;
+}
+
+.doc-tab:hover {
+  background: var(--bg-secondary);
+}
+
+.doc-tab.active {
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  border-bottom: 1px solid var(--bg-primary);
+  font-weight: 600;
+}
+
+.doc-tab-name {
+  max-width: 120px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.doc-tab-close {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  border: none;
+  border-radius: 50%;
+  background: none;
+  color: var(--text-secondary);
+  font-size: 11px;
+  cursor: pointer;
+  padding: 0;
+  line-height: 1;
+}
+
+.doc-tab-close:hover {
+  background: var(--border-color);
+  color: var(--text-primary);
+}
+
+.doc-tab-add {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border: 1px dashed var(--border-color);
+  border-radius: 4px;
+  background: none;
+  color: var(--text-secondary);
+  font-size: 16px;
+  cursor: pointer;
+  padding: 0;
+}
+
+.doc-tab-add:hover {
+  background: var(--bg-hover);
+  border-color: var(--border-color);
+}
+
+.doc-actions {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  flex-shrink: 0;
+}
+
+.doc-action-btn {
+  padding: 4px 10px;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  font-size: 12px;
+  cursor: pointer;
+  transition: background 0.12s;
+}
+
+.doc-action-btn:hover {
+  background: var(--bg-hover);
+  border-color: var(--border-color);
+}
+
+/* Recent dropdown */
+.recent-dropdown {
+  position: relative;
+}
+
+.recent-menu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  right: 0;
+  min-width: 200px;
+  max-height: 300px;
+  overflow-y: auto;
+  background: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+  z-index: 100;
+}
+
+.recent-dropdown:hover .recent-menu {
+  display: flex;
+  flex-direction: column;
+}
+
+.recent-item {
+  padding: 6px 12px;
+  border: none;
+  background: none;
+  text-align: left;
+  font-size: 12px;
+  color: var(--text-primary);
+  cursor: pointer;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.recent-item:hover {
+  background: var(--bg-secondary);
+}

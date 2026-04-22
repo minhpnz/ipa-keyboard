@@ -1,0 +1,10 @@
+[workspace]
+members = [
+    "ime-core/shared",
+    "ime-core/windows",
+    "ime-core/macos",
+]
+exclude = [
+    "companion-app/src-tauri",
+]
+resolver = "2"

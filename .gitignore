@@ -1,0 +1,38 @@
+# macOS
+.DS_Store
+
+# Rust
+/target/
+**/target/
+
+# Build / release artefacts
+/package-release/
+
+# Node / companion-app
+node_modules/
+dist/
+dist-ssr/
+*.log
+
+# Xcode (iOS sub-project)
+**/xcuserdata/
+**/*.xcuserstate
+**/DerivedData/
+**/.build/
+**/Pods/
+
+# Editors
+.vscode/*
+!.vscode/extensions.json
+.idea/
+*.swp
+*.swo
+
+# Session / tool caches
+.claude/
+.superpowers/
+memory/
+tool-config/
+
+# Nested git repositories — decide later: submodule vs flatten
+ime-core/shared/
