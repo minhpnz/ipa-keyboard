@@ -1,0 +1,540 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		8E7EAAEC3719434F21B56AA7 /* IPAKeyboardAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52400F5066C92E53E471E22E /* IPAKeyboardAppApp.swift */; };
+		92CAD0BD357FA9E8BE114DC7 /* IPAKeyboardExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = DC957DCA5172F0369EDB430A /* IPAKeyboardExtension.appex */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		EAC2453C4E0F88F58BBC5758 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD9C8F8ED919FC02690CD55F /* ContentView.swift */; };
+		F1849601682D379FCC274353 /* KeyboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849CD308F0E571DB3CF528FC /* KeyboardViewController.swift */; };
+		F5E43E5962BA14C8C867D8F9 /* IPAKeyboardAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28F1417574EE2566E094269 /* IPAKeyboardAppTests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		7A6BF7B600D48C4A7A17AC2C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C5FA5736939BC1EB138D1F0B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = C4D09540091AB004CAA74F38;
+			remoteInfo = IPAKeyboardApp;
+		};
+		926413E22B2B10F67F869AF1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C5FA5736939BC1EB138D1F0B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F7327234997CFC86A614DA4C;
+			remoteInfo = IPAKeyboardExtension;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		2A021CACF477791B5B75998F /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				92CAD0BD357FA9E8BE114DC7 /* IPAKeyboardExtension.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		19B5C1426F5806C263218151 /* IPAKeyboardApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = IPAKeyboardApp.entitlements; sourceTree = "<group>"; };
+		3273AD44C6E1227E120F77C7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		3AC1BBD0DDB2B559A07C4AAE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		42BEEB009B77F63DB737ABCE /* IPAKeyboardApp.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = IPAKeyboardApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		52400F5066C92E53E471E22E /* IPAKeyboardAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IPAKeyboardAppApp.swift; sourceTree = "<group>"; };
+		7E8C31F94B2A988096431A74 /* IPAKeyboardAppTests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = IPAKeyboardAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		849CD308F0E571DB3CF528FC /* KeyboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardViewController.swift; sourceTree = "<group>"; };
+		B47DB510C8834C43C466AD27 /* IPAKeyboardExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = IPAKeyboardExtension.entitlements; sourceTree = "<group>"; };
+		CD9C8F8ED919FC02690CD55F /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		D28F1417574EE2566E094269 /* IPAKeyboardAppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IPAKeyboardAppTests.swift; sourceTree = "<group>"; };
+		DC957DCA5172F0369EDB430A /* IPAKeyboardExtension.appex */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = "wrapper.app-extension"; path = IPAKeyboardExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		14014D147F98FD80C1D3A844 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				42BEEB009B77F63DB737ABCE /* IPAKeyboardApp.app */,
+				7E8C31F94B2A988096431A74 /* IPAKeyboardAppTests.xctest */,
+				DC957DCA5172F0369EDB430A /* IPAKeyboardExtension.appex */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		1CE862C1368C088275BBB5A7 /* IPAKeyboardAppTests */ = {
+			isa = PBXGroup;
+			children = (
+				D28F1417574EE2566E094269 /* IPAKeyboardAppTests.swift */,
+			);
+			path = IPAKeyboardAppTests;
+			sourceTree = "<group>";
+		};
+		2E87F9309A4250A21E939B72 /* IPAKeyboardApp */ = {
+			isa = PBXGroup;
+			children = (
+				CD9C8F8ED919FC02690CD55F /* ContentView.swift */,
+				3AC1BBD0DDB2B559A07C4AAE /* Info.plist */,
+				19B5C1426F5806C263218151 /* IPAKeyboardApp.entitlements */,
+				52400F5066C92E53E471E22E /* IPAKeyboardAppApp.swift */,
+			);
+			path = IPAKeyboardApp;
+			sourceTree = "<group>";
+		};
+		8BE79CCA6F57D8F9E3169004 = {
+			isa = PBXGroup;
+			children = (
+				2E87F9309A4250A21E939B72 /* IPAKeyboardApp */,
+				1CE862C1368C088275BBB5A7 /* IPAKeyboardAppTests */,
+				916205F68F0BC1363F21C579 /* IPAKeyboardExtension */,
+				14014D147F98FD80C1D3A844 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		916205F68F0BC1363F21C579 /* IPAKeyboardExtension */ = {
+			isa = PBXGroup;
+			children = (
+				3273AD44C6E1227E120F77C7 /* Info.plist */,
+				B47DB510C8834C43C466AD27 /* IPAKeyboardExtension.entitlements */,
+				849CD308F0E571DB3CF528FC /* KeyboardViewController.swift */,
+			);
+			path = IPAKeyboardExtension;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		17AD3904A0742048DCA6375D /* IPAKeyboardAppTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 32BB57675827DD5003D9216D /* Build configuration list for PBXNativeTarget "IPAKeyboardAppTests" */;
+			buildPhases = (
+				1DE861F39686B70DD8C47566 /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				C68ECA7B9C89614EACD5B0CE /* PBXTargetDependency */,
+			);
+			name = IPAKeyboardAppTests;
+			packageProductDependencies = (
+			);
+			productName = IPAKeyboardAppTests;
+			productReference = 7E8C31F94B2A988096431A74 /* IPAKeyboardAppTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		C4D09540091AB004CAA74F38 /* IPAKeyboardApp */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DF521F95BD33B79CDA4ACD3D /* Build configuration list for PBXNativeTarget "IPAKeyboardApp" */;
+			buildPhases = (
+				138140232F2CB75E9DC43A47 /* Sources */,
+				2A021CACF477791B5B75998F /* Embed Foundation Extensions */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				4628188170C43AA62BC7B13E /* PBXTargetDependency */,
+			);
+			name = IPAKeyboardApp;
+			packageProductDependencies = (
+			);
+			productName = IPAKeyboardApp;
+			productReference = 42BEEB009B77F63DB737ABCE /* IPAKeyboardApp.app */;
+			productType = "com.apple.product-type.application";
+		};
+		F7327234997CFC86A614DA4C /* IPAKeyboardExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F0B9BB1EAA8BFC0061E605AB /* Build configuration list for PBXNativeTarget "IPAKeyboardExtension" */;
+			buildPhases = (
+				EED9E55ADB885478B30CEBD2 /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = IPAKeyboardExtension;
+			packageProductDependencies = (
+			);
+			productName = IPAKeyboardExtension;
+			productReference = DC957DCA5172F0369EDB430A /* IPAKeyboardExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		C5FA5736939BC1EB138D1F0B /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1540;
+				TargetAttributes = {
+					17AD3904A0742048DCA6375D = {
+						DevelopmentTeam = "";
+						ProvisioningStyle = Automatic;
+					};
+					C4D09540091AB004CAA74F38 = {
+						DevelopmentTeam = "";
+						ProvisioningStyle = Automatic;
+					};
+					F7327234997CFC86A614DA4C = {
+						DevelopmentTeam = "";
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = 54D0908B30538A1B719C6485 /* Build configuration list for PBXProject "IPAKeyboard" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+			);
+			mainGroup = 8BE79CCA6F57D8F9E3169004;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			productRefGroup = 14014D147F98FD80C1D3A844 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				C4D09540091AB004CAA74F38 /* IPAKeyboardApp */,
+				17AD3904A0742048DCA6375D /* IPAKeyboardAppTests */,
+				F7327234997CFC86A614DA4C /* IPAKeyboardExtension */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		138140232F2CB75E9DC43A47 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EAC2453C4E0F88F58BBC5758 /* ContentView.swift in Sources */,
+				8E7EAAEC3719434F21B56AA7 /* IPAKeyboardAppApp.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1DE861F39686B70DD8C47566 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F5E43E5962BA14C8C867D8F9 /* IPAKeyboardAppTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EED9E55ADB885478B30CEBD2 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F1849601682D379FCC274353 /* KeyboardViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		4628188170C43AA62BC7B13E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = F7327234997CFC86A614DA4C /* IPAKeyboardExtension */;
+			targetProxy = 926413E22B2B10F67F869AF1 /* PBXContainerItemProxy */;
+		};
+		C68ECA7B9C89614EACD5B0CE /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = C4D09540091AB004CAA74F38 /* IPAKeyboardApp */;
+			targetProxy = 7A6BF7B600D48C4A7A17AC2C /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		186549984D2D9BDFE447FDCE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = "";
+				CODE_SIGN_ENTITLEMENTS = IPAKeyboardApp/IPAKeyboardApp.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				INFOPLIST_FILE = IPAKeyboardApp/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.minhphan.ipa-keyboard-ios";
+				PRODUCT_NAME = IPAKeyboardApp;
+				SDKROOT = iphoneos;
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		2964A70BE2D895E4CA8B82A9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = "";
+				ENABLE_BITCODE = NO;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				MARKETING_VERSION = 1.0.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_STRICT_CONCURRENCY = minimal;
+				SWIFT_VERSION = 5.9;
+			};
+			name = Release;
+		};
+		4F9CE36127A0F52114B1AF78 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.minhphan.IPAKeyboardAppTests;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/IPAKeyboardApp.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/IPAKeyboardApp";
+			};
+			name = Release;
+		};
+		6AEE7873A17715464616AF82 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = "";
+				ENABLE_BITCODE = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"DEBUG=1",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				MARKETING_VERSION = 1.0.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_STRICT_CONCURRENCY = minimal;
+				SWIFT_VERSION = 5.9;
+			};
+			name = Debug;
+		};
+		BF4F86EB8776940F8BA58063 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = "";
+				CODE_SIGN_ENTITLEMENTS = IPAKeyboardApp/IPAKeyboardApp.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				INFOPLIST_FILE = IPAKeyboardApp/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.minhphan.ipa-keyboard-ios";
+				PRODUCT_NAME = IPAKeyboardApp;
+				SDKROOT = iphoneos;
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		DCADD5D906C328861AE6C90A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = IPAKeyboardExtension/IPAKeyboardExtension.entitlements;
+				INFOPLIST_FILE = IPAKeyboardExtension/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.minhphan.ipa-keyboard-ios.keyboard";
+				PRODUCT_NAME = IPAKeyboardExtension;
+				SDKROOT = iphoneos;
+				SUPPORTS_MACCATALYST = NO;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		FCCCD3EEC452BB5736E2EC6A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = IPAKeyboardExtension/IPAKeyboardExtension.entitlements;
+				INFOPLIST_FILE = IPAKeyboardExtension/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.minhphan.ipa-keyboard-ios.keyboard";
+				PRODUCT_NAME = IPAKeyboardExtension;
+				SDKROOT = iphoneos;
+				SUPPORTS_MACCATALYST = NO;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		FCDC7956E6C96D8A216254FA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.minhphan.IPAKeyboardAppTests;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/IPAKeyboardApp.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/IPAKeyboardApp";
+			};
+			name = Debug;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		32BB57675827DD5003D9216D /* Build configuration list for PBXNativeTarget "IPAKeyboardAppTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FCDC7956E6C96D8A216254FA /* Debug */,
+				4F9CE36127A0F52114B1AF78 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		54D0908B30538A1B719C6485 /* Build configuration list for PBXProject "IPAKeyboard" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6AEE7873A17715464616AF82 /* Debug */,
+				2964A70BE2D895E4CA8B82A9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		DF521F95BD33B79CDA4ACD3D /* Build configuration list for PBXNativeTarget "IPAKeyboardApp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BF4F86EB8776940F8BA58063 /* Debug */,
+				186549984D2D9BDFE447FDCE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		F0B9BB1EAA8BFC0061E605AB /* Build configuration list for PBXNativeTarget "IPAKeyboardExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DCADD5D906C328861AE6C90A /* Debug */,
+				FCCCD3EEC452BB5736E2EC6A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = C5FA5736939BC1EB138D1F0B /* Project object */;
+}
