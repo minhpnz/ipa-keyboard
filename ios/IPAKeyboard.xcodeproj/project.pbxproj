@@ -7,8 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		70301B015307FE7224A6EA54 /* IPACore in Frameworks */ = {isa = PBXBuildFile; productRef = 3CE8DD253AFE95AF1E469C6A /* IPACore */; };
 		8E7EAAEC3719434F21B56AA7 /* IPAKeyboardAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52400F5066C92E53E471E22E /* IPAKeyboardAppApp.swift */; };
 		92CAD0BD357FA9E8BE114DC7 /* IPAKeyboardExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = DC957DCA5172F0369EDB430A /* IPAKeyboardExtension.appex */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		A31E75BE5B0BC86695F6A38E /* IPACore in Frameworks */ = {isa = PBXBuildFile; productRef = 6492F72E1FAB889494992289 /* IPACore */; };
 		EAC2453C4E0F88F58BBC5758 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD9C8F8ED919FC02690CD55F /* ContentView.swift */; };
 		F1849601682D379FCC274353 /* KeyboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849CD308F0E571DB3CF528FC /* KeyboardViewController.swift */; };
 		F5E43E5962BA14C8C867D8F9 /* IPAKeyboardAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28F1417574EE2566E094269 /* IPAKeyboardAppTests.swift */; };
@@ -48,6 +50,7 @@
 /* Begin PBXFileReference section */
 		19B5C1426F5806C263218151 /* IPAKeyboardApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = IPAKeyboardApp.entitlements; sourceTree = "<group>"; };
 		3273AD44C6E1227E120F77C7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		38B5130329A8DA5854F25015 /* IPACore */ = {isa = PBXFileReference; lastKnownFileType = folder; name = IPACore; path = IPACore; sourceTree = SOURCE_ROOT; };
 		3AC1BBD0DDB2B559A07C4AAE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		42BEEB009B77F63DB737ABCE /* IPAKeyboardApp.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = IPAKeyboardApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		52400F5066C92E53E471E22E /* IPAKeyboardAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IPAKeyboardAppApp.swift; sourceTree = "<group>"; };
@@ -58,6 +61,25 @@
 		D28F1417574EE2566E094269 /* IPAKeyboardAppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IPAKeyboardAppTests.swift; sourceTree = "<group>"; };
 		DC957DCA5172F0369EDB430A /* IPAKeyboardExtension.appex */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = "wrapper.app-extension"; path = IPAKeyboardExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		2D76475FD040996E1C90F9C3 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A31E75BE5B0BC86695F6A38E /* IPACore in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EFA676EBFFBE9025A84B4867 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				70301B015307FE7224A6EA54 /* IPACore in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
 		14014D147F98FD80C1D3A844 /* Products */ = {
@@ -95,6 +117,7 @@
 				2E87F9309A4250A21E939B72 /* IPAKeyboardApp */,
 				1CE862C1368C088275BBB5A7 /* IPAKeyboardAppTests */,
 				916205F68F0BC1363F21C579 /* IPAKeyboardExtension */,
+				F4EE30A3207BD7D47034562D /* Packages */,
 				14014D147F98FD80C1D3A844 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -107,6 +130,14 @@
 				849CD308F0E571DB3CF528FC /* KeyboardViewController.swift */,
 			);
 			path = IPAKeyboardExtension;
+			sourceTree = "<group>";
+		};
+		F4EE30A3207BD7D47034562D /* Packages */ = {
+			isa = PBXGroup;
+			children = (
+				38B5130329A8DA5854F25015 /* IPACore */,
+			);
+			name = Packages;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -135,6 +166,7 @@
 			buildConfigurationList = DF521F95BD33B79CDA4ACD3D /* Build configuration list for PBXNativeTarget "IPAKeyboardApp" */;
 			buildPhases = (
 				138140232F2CB75E9DC43A47 /* Sources */,
+				EFA676EBFFBE9025A84B4867 /* Frameworks */,
 				2A021CACF477791B5B75998F /* Embed Foundation Extensions */,
 			);
 			buildRules = (
@@ -144,6 +176,7 @@
 			);
 			name = IPAKeyboardApp;
 			packageProductDependencies = (
+				3CE8DD253AFE95AF1E469C6A /* IPACore */,
 			);
 			productName = IPAKeyboardApp;
 			productReference = 42BEEB009B77F63DB737ABCE /* IPAKeyboardApp.app */;
@@ -154,6 +187,7 @@
 			buildConfigurationList = F0B9BB1EAA8BFC0061E605AB /* Build configuration list for PBXNativeTarget "IPAKeyboardExtension" */;
 			buildPhases = (
 				EED9E55ADB885478B30CEBD2 /* Sources */,
+				2D76475FD040996E1C90F9C3 /* Frameworks */,
 			);
 			buildRules = (
 			);
@@ -161,6 +195,7 @@
 			);
 			name = IPAKeyboardExtension;
 			packageProductDependencies = (
+				6492F72E1FAB889494992289 /* IPACore */,
 			);
 			productName = IPAKeyboardExtension;
 			productReference = DC957DCA5172F0369EDB430A /* IPAKeyboardExtension.appex */;
@@ -198,6 +233,9 @@
 			);
 			mainGroup = 8BE79CCA6F57D8F9E3169004;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				820AE734536470F495C3BB59 /* XCLocalSwiftPackageReference "IPACore" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 14014D147F98FD80C1D3A844 /* Products */;
 			projectDirPath = "";
@@ -535,6 +573,24 @@
 			defaultConfigurationName = Debug;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCLocalSwiftPackageReference section */
+		820AE734536470F495C3BB59 /* XCLocalSwiftPackageReference "IPACore" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = IPACore;
+		};
+/* End XCLocalSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		3CE8DD253AFE95AF1E469C6A /* IPACore */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = IPACore;
+		};
+		6492F72E1FAB889494992289 /* IPACore */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = IPACore;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = C5FA5736939BC1EB138D1F0B /* Project object */;
 }

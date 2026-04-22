@@ -8,6 +8,10 @@ options:
   xcodeVersion: "15.4"
   groupSortPosition: top
 
+packages:
+  IPACore:
+    path: IPACore
+
 settings:
   base:
     SWIFT_VERSION: "5.9"
@@ -40,6 +44,8 @@ targets:
       - target: IPAKeyboardExtension
         embed: true
         codeSign: true
+      - package: IPACore
+        product: IPACore
 
   IPAKeyboardExtension:
     type: app-extension
@@ -54,6 +60,9 @@ targets:
         CODE_SIGN_ENTITLEMENTS: IPAKeyboardExtension/IPAKeyboardExtension.entitlements
         TARGETED_DEVICE_FAMILY: "1,2"
         SUPPORTS_MACCATALYST: NO
+    dependencies:
+      - package: IPACore
+        product: IPACore
 
   IPAKeyboardAppTests:
     type: bundle.unit-test

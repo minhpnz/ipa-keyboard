@@ -1,4 +1,5 @@
 import UIKit
+import IPACore
 
 final class KeyboardViewController: UIInputViewController {
 

@@ -1,4 +1,5 @@
 import SwiftUI
+import IPACore
 
 @main
 struct IPAKeyboardAppApp: App {
