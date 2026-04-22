@@ -6,6 +6,8 @@
 
 // swiftlint:disable all
 
+import Foundation
+
 public enum IPAMapping {
 
     /// SHA256 of shared-config/default-mappings.json at codegen time.

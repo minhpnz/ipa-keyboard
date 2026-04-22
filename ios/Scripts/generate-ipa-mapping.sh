@@ -11,6 +11,11 @@ REPO_ROOT="$(cd "$SCRIPT_DIR/../.." && pwd)"
 SOURCE_JSON="$REPO_ROOT/shared-config/default-mappings.json"
 OUT_FILE="$REPO_ROOT/ios/IPACore/Sources/IPACore/IPAMapping.swift"
 
+if [[ ! -f "$SOURCE_JSON" ]]; then
+    echo "ERROR: $SOURCE_JSON not found" >&2
+    exit 1
+fi
+
 # Compute SHA256 of the source JSON (macOS shasum)
 SOURCE_HASH="$(shasum -a 256 "$SOURCE_JSON" | awk '{print $1}')"
 
@@ -31,6 +36,8 @@ cat > "$OUT_FILE" << SWIFT
 // Source SHA256: ${SOURCE_HASH}
 
 // swiftlint:disable all
+
+import Foundation
 
 public enum IPAMapping {
 

@@ -438,17 +438,21 @@ NAMES_HASH="$(shasum -a 256 "$NAMES_INPUT" | awk '{print $1}')"
     echo "public enum SymbolReferenceData {"
     echo "    public static let sourceHash: String = \"$SYMBOLS_HASH\""
     echo "    public static let rows: [SymbolRow] = ["
-    # For each dotted key in default-mappings order, emit row with entries from ipa-symbols.json
+    # For each dotted key in default-mappings insertion order, emit row with entries from ipa-symbols.json.
+    # NOTE: shared-config/default-mappings.json uses an OBJECT-of-arrays shape
+    # ({"mappings": {"a": [...], "e": [...]}}), not array-of-objects. Iterate via to_entries[].
+    # The input variable below refers to whatever Task 1.4's script named its mapping JSON path
+    # (in the current impl that's $SOURCE_JSON — adjust here to match if it's different).
     jq -r --slurpfile syms "$SYMBOLS_INPUT" '
-        .mappings[] as $m
+        .mappings | to_entries[] as $m
         | "        SymbolRow(key: \"\($m.key)\", entries: [" +
           (
-            [$m.variants[] as $v
+            [$m.value[] as $v
               | ($syms[0].symbols // $syms[0] | .[] | select(.symbol == $v))
               | "SymbolEntry(symbol: \"\(.symbol)\", name: \"\(.name // "")\", example: \"\(.example // "")\")"
             ] | join(", ")
           ) + "]),"
-    ' "$INPUT"
+    ' "$SOURCE_JSON"
     echo "    ]"
     echo "}"
 } > "$REFERENCE_OUTPUT"
