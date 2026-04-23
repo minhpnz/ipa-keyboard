@@ -13,51 +13,70 @@ struct KeyboardRootView: View {
     private let row2: [Character] = Array("asdfghjkl")
     private let row3: [Character] = Array("zxcvbnm")
 
+    private let keySpacing: CGFloat = 5
+    private let horizontalPadding: CGFloat = 4
+
     var body: some View {
-        VStack(spacing: 6) {
-            KeyRow(keys: row1, isShifted: isShifted, onTap: insert)
+        GeometryReader { geo in
+            let available = geo.size.width - horizontalPadding * 2
+            // Row 1 has 10 letters and 9 gaps.
+            let letterW = (available - keySpacing * 9) / 10
+            let shiftW = letterW * 1.5
+            let row2Inset = (letterW + keySpacing) / 2
+
+            VStack(spacing: 6) {
+                KeyRow(keys: row1, isShifted: isShifted,
+                       keyWidth: letterW, spacing: keySpacing,
+                       onTap: insert)
+                    .frame(height: rowHeight)
+
+                KeyRow(keys: row2, isShifted: isShifted,
+                       keyWidth: letterW, spacing: keySpacing,
+                       onTap: insert)
+                    .padding(.horizontal, row2Inset)
+                    .frame(height: rowHeight)
+
+                HStack(spacing: keySpacing) {
+                    KeyView(label: "⇧", style: .shift, showsDot: false,
+                            onTap: { isShifted.toggle() })
+                        .frame(width: shiftW)
+                    KeyRow(keys: row3, isShifted: isShifted,
+                           keyWidth: letterW, spacing: keySpacing,
+                           onTap: insert)
+                    KeyView(label: "⌫", style: .function, showsDot: false,
+                            onTap: { onDeleteBackward() })
+                        .frame(width: shiftW)
+                }
                 .frame(height: rowHeight)
 
-            HStack {
-                Spacer(minLength: sideInset)
-                KeyRow(keys: row2, isShifted: isShifted, onTap: insert)
-                    .frame(height: rowHeight)
-                Spacer(minLength: sideInset)
+                functionRow(letterW: letterW)
             }
-
-            HStack(spacing: 5) {
-                KeyView(label: "⇧", style: .shift, showsDot: false, onTap: { isShifted.toggle() })
-                    .frame(maxWidth: .infinity, maxHeight: .infinity)
-                KeyRow(keys: row3, isShifted: isShifted, onTap: insert)
-                    .frame(height: rowHeight)
-                KeyView(label: "⌫", style: .function, showsDot: false, onTap: { onDeleteBackward() })
-                    .frame(maxWidth: .infinity, maxHeight: .infinity)
-            }
-            .frame(height: rowHeight)
-
-            functionRow
+            .padding(.vertical, 6)
+            .padding(.horizontal, horizontalPadding)
+            .frame(maxWidth: .infinity)
+            .background(Color(uiColor: .systemGray6))
         }
-        .padding(.vertical, 6)
-        .padding(.horizontal, 4)
-        .frame(maxWidth: .infinity)
         .frame(height: totalHeight)
-        .background(Color(uiColor: .systemGray6))
     }
 
-    private var functionRow: some View {
-        HStack(spacing: 5) {
+    private func functionRow(letterW: CGFloat) -> some View {
+        // 123 / globe / space / IPA / return — keep 123/globe/IPA at ~1.5×
+        // letter width (matches shift/backspace above), return slightly wider.
+        let functionW = letterW * 1.5
+        let returnW = letterW * 2
+        return HStack(spacing: keySpacing) {
             KeyView(label: "123", style: .function, showsDot: false, onTap: { /* Phase 4 */ })
-                .frame(maxWidth: functionKeyWidth, maxHeight: .infinity)
+                .frame(width: functionW)
             KeyView(label: "🌐", style: .function, showsDot: false, onTap: onAdvanceInputMode)
-                .frame(maxWidth: functionKeyWidth, maxHeight: .infinity)
+                .frame(width: functionW)
             KeyView(label: "space", style: .function, showsDot: false, onTap: { onInsertText(" ") })
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                .frame(maxWidth: .infinity)
             KeyView(label: "IPA", style: .function, showsDot: false, onTap: { /* future */ })
-                .frame(maxWidth: functionKeyWidth, maxHeight: .infinity)
+                .frame(width: functionW)
                 .opacity(0.5)
                 .disabled(true)
             KeyView(label: "return", style: .returnKey, showsDot: false, onTap: { onInsertText("\n") })
-                .frame(maxWidth: returnKeyWidth, maxHeight: .infinity)
+                .frame(width: returnW)
         }
         .frame(height: rowHeight)
     }
@@ -68,23 +87,16 @@ struct KeyboardRootView: View {
         if isShifted { isShifted = false }
     }
 
-    // Size-class-adaptive sizing. Actual iOS keyboard heights.
     @Environment(\.horizontalSizeClass) private var hSize
     @Environment(\.verticalSizeClass) private var vSize
 
     private var rowHeight: CGFloat {
-        if hSize == .regular { return 54 }            // iPad
-        if vSize == .compact { return 38 }            // iPhone landscape
-        return 44                                     // iPhone portrait
+        if hSize == .regular { return 54 }
+        if vSize == .compact { return 38 }
+        return 44
     }
 
     private var totalHeight: CGFloat {
         rowHeight * 4 + 30
     }
-
-    private var sideInset: CGFloat { hSize == .regular ? 27 : 18 }
-
-    private var functionKeyWidth: CGFloat { hSize == .regular ? 56 : 44 }
-
-    private var returnKeyWidth: CGFloat { hSize == .regular ? 84 : 64 }
 }

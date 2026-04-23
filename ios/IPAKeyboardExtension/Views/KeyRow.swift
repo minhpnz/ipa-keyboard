@@ -4,10 +4,12 @@ import IPACore
 struct KeyRow: View {
     let keys: [Character]
     let isShifted: Bool
+    let keyWidth: CGFloat
+    let spacing: CGFloat
     let onTap: (Character) -> Void
 
     var body: some View {
-        HStack(spacing: 5) {
+        HStack(spacing: spacing) {
             ForEach(Array(keys.enumerated()), id: \.offset) { _, key in
                 KeyView(
                     label: isShifted ? String(key).uppercased() : String(key),
@@ -15,7 +17,7 @@ struct KeyRow: View {
                     showsDot: IPAMapping.dottedKeySet.contains(key),
                     onTap: { onTap(key) }
                 )
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                .frame(width: keyWidth)
             }
         }
     }
