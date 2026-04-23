@@ -1,19 +1,39 @@
 import UIKit
+import SwiftUI
 import IPACore
 
 final class KeyboardViewController: UIInputViewController {
 
+    private var hostingController: UIHostingController<KeyboardRootView>?
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        let label = UILabel()
-        label.text = "IPA Keyboard (stub)"
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.textAlignment = .center
-        view.addSubview(label)
+
+        let root = KeyboardRootView(
+            onInsertText: { [weak self] text in
+                self?.textDocumentProxy.insertText(text)
+            },
+            onDeleteBackward: { [weak self] in
+                self?.textDocumentProxy.deleteBackward()
+            },
+            onAdvanceInputMode: { [weak self] in
+                self?.advanceToNextInputMode()
+            }
+        )
+
+        let hosting = UIHostingController(rootView: root)
+        hosting.view.backgroundColor = .clear
+        hosting.view.translatesAutoresizingMaskIntoConstraints = false
+        addChild(hosting)
+        view.addSubview(hosting.view)
+        hosting.didMove(toParent: self)
+
         NSLayoutConstraint.activate([
-            label.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            label.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-            view.heightAnchor.constraint(equalToConstant: 260)
+            hosting.view.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            hosting.view.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            hosting.view.topAnchor.constraint(equalTo: view.topAnchor),
+            hosting.view.bottomAnchor.constraint(equalTo: view.bottomAnchor),
         ])
+        hostingController = hosting
     }
 }
