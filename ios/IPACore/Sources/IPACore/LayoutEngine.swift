@@ -5,6 +5,7 @@ public enum LayoutEngine {
 
     public static let popoverDelay: TimeInterval = 0.5
     public static let clipboardDebounceInterval: TimeInterval = 0.3
+    public static let popoverPadding: CGFloat = 4
 
     /// Compute the popover frame so it is fully inside `keyboardBounds`.
     /// Preference order: above-and-centered → below-and-centered → clamp horizontally.
@@ -13,12 +14,18 @@ public enum LayoutEngine {
         popoverSize: CGSize,
         keyboardBounds: CGRect
     ) -> CGRect {
-        let padding: CGFloat = 4
+        let padding = popoverPadding
 
-        // Vertical: try above; mirror below if it would clip.
+        // Vertical: try above; mirror below if above would clip.
+        // Then clamp so the popover always lies within keyboardBounds —
+        // covers the case where neither above nor below fully fits.
         let aboveY = keyFrame.minY - popoverSize.height - padding
         let belowY = keyFrame.maxY + padding
-        let y: CGFloat = aboveY >= keyboardBounds.minY ? aboveY : belowY
+        var y: CGFloat = aboveY >= keyboardBounds.minY ? aboveY : belowY
+        if y < keyboardBounds.minY { y = keyboardBounds.minY }
+        if y + popoverSize.height > keyboardBounds.maxY {
+            y = keyboardBounds.maxY - popoverSize.height
+        }
 
         // Horizontal: center over key, then clamp to keyboardBounds.
         var x = keyFrame.midX - popoverSize.width / 2
