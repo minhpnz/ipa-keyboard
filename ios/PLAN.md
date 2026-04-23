@@ -45,7 +45,7 @@
 
 ## Overall status
 
-- [ ] Phase 1 — Foundation
+- [x] Phase 1 — Foundation
 - [ ] Phase 2 — Keyboard alpha layer
 - [ ] Phase 3 — Long-press popover
 - [ ] Phase 4 — Numbers / symbols / coach mark
