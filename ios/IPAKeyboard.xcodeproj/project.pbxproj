@@ -14,6 +14,7 @@
 		8E7EAAEC3719434F21B56AA7 /* IPAKeyboardAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52400F5066C92E53E471E22E /* IPAKeyboardAppApp.swift */; };
 		92CAD0BD357FA9E8BE114DC7 /* IPAKeyboardExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = DC957DCA5172F0369EDB430A /* IPAKeyboardExtension.appex */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		A31E75BE5B0BC86695F6A38E /* IPACore in Frameworks */ = {isa = PBXBuildFile; productRef = 6492F72E1FAB889494992289 /* IPACore */; };
+		AA60AB2302AFB9EAA1899248 /* KeyRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAEDE82EC410B1CDA656F94A /* KeyRow.swift */; };
 		EAC2453C4E0F88F58BBC5758 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD9C8F8ED919FC02690CD55F /* ContentView.swift */; };
 		F1849601682D379FCC274353 /* KeyboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849CD308F0E571DB3CF528FC /* KeyboardViewController.swift */; };
 		F5E43E5962BA14C8C867D8F9 /* IPAKeyboardAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28F1417574EE2566E094269 /* IPAKeyboardAppTests.swift */; };
@@ -61,6 +62,7 @@
 		7E8C31F94B2A988096431A74 /* IPAKeyboardAppTests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = IPAKeyboardAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		849CD308F0E571DB3CF528FC /* KeyboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardViewController.swift; sourceTree = "<group>"; };
 		8C932A31D5C02A418CB9F797 /* KeyboardRootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardRootView.swift; sourceTree = "<group>"; };
+		AAEDE82EC410B1CDA656F94A /* KeyRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyRow.swift; sourceTree = "<group>"; };
 		B47DB510C8834C43C466AD27 /* IPAKeyboardExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = IPAKeyboardExtension.entitlements; sourceTree = "<group>"; };
 		CD9C8F8ED919FC02690CD55F /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		D28F1417574EE2566E094269 /* IPAKeyboardAppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IPAKeyboardAppTests.swift; sourceTree = "<group>"; };
@@ -103,6 +105,7 @@
 			children = (
 				19FB8297E10445569709C1F7 /* Color+IPA.swift */,
 				8C932A31D5C02A418CB9F797 /* KeyboardRootView.swift */,
+				AAEDE82EC410B1CDA656F94A /* KeyRow.swift */,
 				D5223846DC7961D7F4DB569B /* KeyView.swift */,
 			);
 			path = Views;
@@ -288,6 +291,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2B8287C2671A45C61987AEED /* Color+IPA.swift in Sources */,
+				AA60AB2302AFB9EAA1899248 /* KeyRow.swift in Sources */,
 				1558C8E638FA81B2F9834136 /* KeyView.swift in Sources */,
 				1AA3EAE09D5CA42DF8C2E878 /* KeyboardRootView.swift in Sources */,
 				F1849601682D379FCC274353 /* KeyboardViewController.swift in Sources */,
