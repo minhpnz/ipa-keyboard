@@ -11,6 +11,7 @@ import Foundation
 public struct SymbolRow: Equatable, Hashable, Sendable {
     public let symbol: String
     public let example: String
+    // Explicit public init — Swift's memberwise init is internal by default.
     public init(symbol: String, example: String) {
         self.symbol = symbol
         self.example = example

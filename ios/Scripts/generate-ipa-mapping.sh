@@ -140,6 +140,7 @@ import Foundation
 public struct SymbolRow: Equatable, Hashable, Sendable {
     public let symbol: String
     public let example: String
+    // Explicit public init — Swift's memberwise init is internal by default.
     public init(symbol: String, example: String) {
         self.symbol = symbol
         self.example = example
@@ -170,6 +171,21 @@ NAMES_HASH="$(shasum -a 256 "$NAMES_TS" | awk '{print $1}')"
 # Extract tab-separated (symbol, name) pairs in source order.
 NAMES_TSV="$(grep -oE 'symbol: "[^"]+", name: "[^"]+"' "$NAMES_TS" \
     | sed -E 's/symbol: "([^"]+)", name: "([^"]+)"/\1\t\2/')"
+
+# Sanity-check the extraction count against a lower bound derived from the
+# source file itself: the number of object-literal entries (lines that begin
+# with `{`). This count is independent of field order, so if someone
+# reorders `name` before `symbol`, the extraction regex above silently
+# yields fewer rows while the expected count stays the same — and we fail
+# loudly instead of emitting a silently-truncated map.
+EXPECTED_NAMES_COUNT="$(grep -cE '^\s*\{' "$NAMES_TS")"
+EXTRACTED_NAMES_COUNT="$(printf '%s\n' "$NAMES_TSV" | grep -c $'\t' || true)"
+if [[ "$EXTRACTED_NAMES_COUNT" -lt "$EXPECTED_NAMES_COUNT" ]]; then
+    echo "ERROR: name extraction from $NAMES_TS produced $EXTRACTED_NAMES_COUNT rows, expected at least $EXPECTED_NAMES_COUNT." >&2
+    echo "       Likely cause: field order changed in ipa-names.ts (name before symbol), a new escaping form was introduced," >&2
+    echo "       or the regex in generate-ipa-mapping.sh no longer matches. Update the regex or normalize the source." >&2
+    exit 1
+fi
 
 # Detect duplicates with conflicting names. Identical duplicates are also rejected
 # so the source file stays canonical — we only accept each symbol once.
