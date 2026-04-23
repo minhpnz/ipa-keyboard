@@ -47,17 +47,17 @@ struct KeyboardRootView: View {
     private var functionRow: some View {
         HStack(spacing: 5) {
             KeyView(label: "123", style: .function, showsDot: false, onTap: { /* Phase 4 */ })
-                .frame(maxWidth: 44, maxHeight: .infinity)
+                .frame(maxWidth: functionKeyWidth, maxHeight: .infinity)
             KeyView(label: "🌐", style: .function, showsDot: false, onTap: onAdvanceInputMode)
-                .frame(maxWidth: 44, maxHeight: .infinity)
+                .frame(maxWidth: functionKeyWidth, maxHeight: .infinity)
             KeyView(label: "space", style: .function, showsDot: false, onTap: { onInsertText(" ") })
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
             KeyView(label: "IPA", style: .function, showsDot: false, onTap: { /* future */ })
-                .frame(maxWidth: 44, maxHeight: .infinity)
+                .frame(maxWidth: functionKeyWidth, maxHeight: .infinity)
                 .opacity(0.5)
                 .disabled(true)
             KeyView(label: "return", style: .returnKey, showsDot: false, onTap: { onInsertText("\n") })
-                .frame(maxWidth: 64, maxHeight: .infinity)
+                .frame(maxWidth: returnKeyWidth, maxHeight: .infinity)
         }
         .frame(height: rowHeight)
     }
@@ -82,5 +82,9 @@ struct KeyboardRootView: View {
         rowHeight * 4 + 30
     }
 
-    private var sideInset: CGFloat { 18 }
+    private var sideInset: CGFloat { hSize == .regular ? 27 : 18 }
+
+    private var functionKeyWidth: CGFloat { hSize == .regular ? 56 : 44 }
+
+    private var returnKeyWidth: CGFloat { hSize == .regular ? 84 : 64 }
 }
