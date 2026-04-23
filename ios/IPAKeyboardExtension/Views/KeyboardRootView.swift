@@ -21,7 +21,7 @@ struct KeyboardRootView: View {
             let available = geo.size.width - horizontalPadding * 2
             // Row 1 has 10 letters and 9 gaps.
             let letterW = (available - keySpacing * 9) / 10
-            let shiftW = letterW * 1.5
+            let shiftW = letterW * 1.25
             let row2Inset = (letterW + keySpacing) / 2
 
             VStack(spacing: 6) {
