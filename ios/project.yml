@@ -11,6 +11,9 @@ options:
 packages:
   IPACore:
     path: IPACore
+  SnapshotTesting:
+    url: https://github.com/pointfreeco/swift-snapshot-testing
+    from: "1.15.0"
 
 settings:
   base:
@@ -72,10 +75,30 @@ targets:
     settings:
       base:
         IPHONEOS_DEPLOYMENT_TARGET: "16.0"
+        GENERATE_INFOPLIST_FILE: YES
         BUNDLE_LOADER: "$(TEST_HOST)"
         TEST_HOST: "$(BUILT_PRODUCTS_DIR)/IPAKeyboardApp.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/IPAKeyboardApp"
     dependencies:
       - target: IPAKeyboardApp
+
+  KeyboardExtensionSnapshotTests:
+    type: bundle.unit-test
+    platform: iOS
+    sources:
+      - path: Tests/KeyboardExtensionSnapshotTests
+      - path: IPAKeyboardExtension/Views
+    settings:
+      base:
+        IPHONEOS_DEPLOYMENT_TARGET: "16.0"
+        GENERATE_INFOPLIST_FILE: YES
+        BUNDLE_LOADER: "$(TEST_HOST)"
+        TEST_HOST: "$(BUILT_PRODUCTS_DIR)/IPAKeyboardApp.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/IPAKeyboardApp"
+    dependencies:
+      - target: IPAKeyboardApp
+      - package: IPACore
+        product: IPACore
+      - package: SnapshotTesting
+        product: SnapshotTesting
 
 schemes:
   IPAKeyboardApp:
@@ -86,3 +109,4 @@ schemes:
     test:
       targets:
         - IPAKeyboardAppTests
+        - KeyboardExtensionSnapshotTests

@@ -64,6 +64,17 @@
                ReferencedContainer = "container:IPAKeyboard.xcodeproj">
             </BuildableReference>
          </TestableReference>
+         <TestableReference
+            skipped = "NO"
+            parallelizable = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "9C349A9C4D4BD20A666420A0"
+               BuildableName = "KeyboardExtensionSnapshotTests.xctest"
+               BlueprintName = "KeyboardExtensionSnapshotTests"
+               ReferencedContainer = "container:IPAKeyboard.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
       <CommandLineArguments>
       </CommandLineArguments>
