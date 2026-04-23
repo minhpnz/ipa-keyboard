@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		1558C8E638FA81B2F9834136 /* KeyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5223846DC7961D7F4DB569B /* KeyView.swift */; };
 		1AA3EAE09D5CA42DF8C2E878 /* KeyboardRootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C932A31D5C02A418CB9F797 /* KeyboardRootView.swift */; };
+		2B8287C2671A45C61987AEED /* Color+IPA.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19FB8297E10445569709C1F7 /* Color+IPA.swift */; };
 		70301B015307FE7224A6EA54 /* IPACore in Frameworks */ = {isa = PBXBuildFile; productRef = 3CE8DD253AFE95AF1E469C6A /* IPACore */; };
 		8E7EAAEC3719434F21B56AA7 /* IPAKeyboardAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52400F5066C92E53E471E22E /* IPAKeyboardAppApp.swift */; };
 		92CAD0BD357FA9E8BE114DC7 /* IPAKeyboardExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = DC957DCA5172F0369EDB430A /* IPAKeyboardExtension.appex */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -51,6 +52,7 @@
 
 /* Begin PBXFileReference section */
 		19B5C1426F5806C263218151 /* IPAKeyboardApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = IPAKeyboardApp.entitlements; sourceTree = "<group>"; };
+		19FB8297E10445569709C1F7 /* Color+IPA.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+IPA.swift"; sourceTree = "<group>"; };
 		3273AD44C6E1227E120F77C7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		38B5130329A8DA5854F25015 /* IPACore */ = {isa = PBXFileReference; lastKnownFileType = folder; name = IPACore; path = IPACore; sourceTree = SOURCE_ROOT; };
 		3AC1BBD0DDB2B559A07C4AAE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
@@ -99,6 +101,7 @@
 		19694643B024AA12AD53FAC4 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				19FB8297E10445569709C1F7 /* Color+IPA.swift */,
 				8C932A31D5C02A418CB9F797 /* KeyboardRootView.swift */,
 				D5223846DC7961D7F4DB569B /* KeyView.swift */,
 			);
@@ -284,6 +287,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2B8287C2671A45C61987AEED /* Color+IPA.swift in Sources */,
 				1558C8E638FA81B2F9834136 /* KeyView.swift in Sources */,
 				1AA3EAE09D5CA42DF8C2E878 /* KeyboardRootView.swift in Sources */,
 				F1849601682D379FCC274353 /* KeyboardViewController.swift in Sources */,

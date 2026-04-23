@@ -21,7 +21,7 @@ struct KeyView: View {
                 )
             if showsDot {
                 Circle()
-                    .fill(Color(red: 0.40, green: 0.67, blue: 1.0))
+                    .fill(Color.ipaAccent)
                     .frame(width: 5, height: 5)
                     .offset(x: -5, y: 5)
                     .accessibilityHidden(true)
@@ -47,7 +47,7 @@ struct KeyView: View {
         switch style {
         case .letter: return Color(uiColor: .systemGray4)
         case .function: return Color(uiColor: .systemGray3)
-        case .returnKey: return Color(red: 0.40, green: 0.67, blue: 1.0)
+        case .returnKey: return Color.ipaAccent
         case .shift: return Color(uiColor: .systemGray3)
         }
     }
@@ -64,6 +64,7 @@ struct KeyView: View {
         }
     }
 
+    // TODO(phase-3): dotted keys (showsDot=true) should announce "Key a, has variants".
     private var accessibilityName: String {
         switch style {
         case .letter: return "Key \(label)"
