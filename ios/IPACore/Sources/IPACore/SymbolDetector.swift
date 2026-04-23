@@ -6,10 +6,6 @@ public enum SymbolDetector {
 
     /// True if any known IPA variant appears as a substring of `text`.
     public static func containsIPA(_ text: String) -> Bool {
-        guard !text.isEmpty else { return false }
-        for variant in allKnownVariants where text.contains(variant) {
-            return true
-        }
-        return false
+        allKnownVariants.contains(where: text.contains)
     }
 }

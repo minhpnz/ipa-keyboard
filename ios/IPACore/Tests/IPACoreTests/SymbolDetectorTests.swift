@@ -26,4 +26,13 @@ final class SymbolDetectorTests: XCTestCase {
     func test_allKnownVariantsMatchesIPAMapping() {
         XCTAssertEqual(SymbolDetector.allKnownVariants, IPAMapping.allVariants)
     }
+
+    // Common Latin-extended characters users might paste (accents, diacritics
+    // on plain letters) must NOT trigger IPA detection.
+    func test_latinExtendedLookalikesAreNotDetected() {
+        XCTAssertFalse(SymbolDetector.containsIPA("naïve"))
+        XCTAssertFalse(SymbolDetector.containsIPA("café résumé"))
+        XCTAssertFalse(SymbolDetector.containsIPA("El Niño"))
+        XCTAssertFalse(SymbolDetector.containsIPA("façade"))
+    }
 }
