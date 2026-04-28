@@ -17,7 +17,7 @@ struct VariantPopover: View {
                         RoundedRectangle(cornerRadius: 5, style: .continuous)
                             .fill(
                                 isSelected
-                                    ? Color(red: 0.40, green: 0.67, blue: 1.0)
+                                    ? Color.ipaAccent
                                     : Color(uiColor: .systemGray4)
                             )
                     )
