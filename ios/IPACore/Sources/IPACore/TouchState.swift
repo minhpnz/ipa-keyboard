@@ -4,7 +4,7 @@ public struct TouchState: Equatable {
 
     public struct Active: Equatable {
         public let key: Character
-        public let token: UUID
+        let token: UUID    // opaque handle; only IPACore internals compare it
     }
 
     public private(set) var current: Active? = nil
@@ -24,7 +24,9 @@ public struct TouchState: Equatable {
         current?.token == token
     }
 
-    /// Touch ended normally. Returns the key so the caller can insert it (if no popover was open).
+    /// Touch ended normally. Returns the captured key (or nil if no touch was active).
+    /// Callers that showed a popover should discard the returned key; it is the raw
+    /// base key, not the selected variant.
     @discardableResult
     public mutating func end() -> Character? {
         let key = current?.key

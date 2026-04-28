@@ -21,6 +21,7 @@ final class TouchStateTests: XCTestCase {
         let t1 = s.begin(key: "a")
         _ = s.begin(key: "e")    // stomps t1
         XCTAssertFalse(s.shouldShowPopover(for: t1))
+        XCTAssertEqual(s.current?.key, "e")
     }
 
     func test_cancelClearsState() {
