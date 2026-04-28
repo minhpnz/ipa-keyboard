@@ -6,6 +6,9 @@ struct KeyView: View {
     let label: String
     let style: Style
     let showsDot: Bool
+    var onPressBegan: () -> Void = {}
+    var onDrag: (CGPoint) -> Void = { _ in }
+    var onPressEnded: (Bool) -> Void = { _ in }
     let onTap: () -> Void
 
     @State private var isPressed = false
@@ -31,11 +34,20 @@ struct KeyView: View {
         .scaleEffect(isPressed ? 0.96 : 1)
         .animation(.easeOut(duration: 0.08), value: isPressed)
         .gesture(
-            DragGesture(minimumDistance: 0)
-                .onChanged { _ in isPressed = true }
-                .onEnded { _ in
+            DragGesture(minimumDistance: 0, coordinateSpace: .global)
+                .onChanged { value in
+                    if !isPressed {
+                        isPressed = true
+                        onPressBegan()
+                    }
+                    onDrag(value.location)
+                }
+                .onEnded { value in
                     isPressed = false
-                    onTap()
+                    onPressEnded(value.translation == .zero)
+                    if value.translation == .zero {
+                        onTap()
+                    }
                 }
         )
         .accessibilityElement()

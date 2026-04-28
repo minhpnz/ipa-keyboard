@@ -10,6 +10,10 @@
 		0CC089282ECA7980736BEB01 /* SnapshotTesting in Frameworks */ = {isa = PBXBuildFile; productRef = C19C99F4FB6104EDF48988FA /* SnapshotTesting */; };
 		1558C8E638FA81B2F9834136 /* KeyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5223846DC7961D7F4DB569B /* KeyView.swift */; };
 		1AA3EAE09D5CA42DF8C2E878 /* KeyboardRootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C932A31D5C02A418CB9F797 /* KeyboardRootView.swift */; };
+		1FF7FD5E8A064A8096365401 /* VariantPopover.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31053B0CD7384516A6AD285A /* VariantPopover.swift */; };
+		56BB4D3CF9FA488B936F803F /* HapticsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43D85FEA97C0479F9BE801DB /* HapticsService.swift */; };
+		C12A7FB534D24FB8AC979F9C /* HapticsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43D85FEA97C0479F9BE801DB /* HapticsService.swift */; };
+		FCB9EC8F63B04E30859CE1D8 /* VariantPopover.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31053B0CD7384516A6AD285A /* VariantPopover.swift */; };
 		2B8287C2671A45C61987AEED /* Color+IPA.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19FB8297E10445569709C1F7 /* Color+IPA.swift */; };
 		653A8E85F231F26D25A37723 /* KeyboardSnapshotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88ED51939C048FFEC6ABF95A /* KeyboardSnapshotTests.swift */; };
 		70301B015307FE7224A6EA54 /* IPACore in Frameworks */ = {isa = PBXBuildFile; productRef = 3CE8DD253AFE95AF1E469C6A /* IPACore */; };
@@ -68,6 +72,8 @@
 /* Begin PBXFileReference section */
 		19B5C1426F5806C263218151 /* IPAKeyboardApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = IPAKeyboardApp.entitlements; sourceTree = "<group>"; };
 		19FB8297E10445569709C1F7 /* Color+IPA.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+IPA.swift"; sourceTree = "<group>"; };
+		31053B0CD7384516A6AD285A /* VariantPopover.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VariantPopover.swift; sourceTree = "<group>"; };
+		43D85FEA97C0479F9BE801DB /* HapticsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticsService.swift; sourceTree = "<group>"; };
 		3273AD44C6E1227E120F77C7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		38B5130329A8DA5854F25015 /* IPACore */ = {isa = PBXFileReference; lastKnownFileType = folder; name = IPACore; path = IPACore; sourceTree = SOURCE_ROOT; };
 		3AC1BBD0DDB2B559A07C4AAE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
@@ -141,8 +147,17 @@
 				8C932A31D5C02A418CB9F797 /* KeyboardRootView.swift */,
 				AAEDE82EC410B1CDA656F94A /* KeyRow.swift */,
 				D5223846DC7961D7F4DB569B /* KeyView.swift */,
+				31053B0CD7384516A6AD285A /* VariantPopover.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		43052248AE0349AFB87B56F0 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				43D85FEA97C0479F9BE801DB /* HapticsService.swift */,
+			);
+			path = Services;
 			sourceTree = "<group>";
 		};
 		1CE862C1368C088275BBB5A7 /* IPAKeyboardAppTests */ = {
@@ -180,6 +195,7 @@
 			isa = PBXGroup;
 			children = (
 				19694643B024AA12AD53FAC4 /* Views */,
+				43052248AE0349AFB87B56F0 /* Services */,
 				3273AD44C6E1227E120F77C7 /* Info.plist */,
 				B47DB510C8834C43C466AD27 /* IPAKeyboardExtension.entitlements */,
 				849CD308F0E571DB3CF528FC /* KeyboardViewController.swift */,
@@ -364,6 +380,8 @@
 				DEC48086AA24386FE0F73137 /* KeyRow.swift in Sources */,
 				B3DC54826B5E240DA3656763 /* KeyView.swift in Sources */,
 				AD2B3BCC65C8A532786AAFE1 /* KeyboardRootView.swift in Sources */,
+				FCB9EC8F63B04E30859CE1D8 /* VariantPopover.swift in Sources */,
+				C12A7FB534D24FB8AC979F9C /* HapticsService.swift in Sources */,
 				653A8E85F231F26D25A37723 /* KeyboardSnapshotTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -376,6 +394,8 @@
 				AA60AB2302AFB9EAA1899248 /* KeyRow.swift in Sources */,
 				1558C8E638FA81B2F9834136 /* KeyView.swift in Sources */,
 				1AA3EAE09D5CA42DF8C2E878 /* KeyboardRootView.swift in Sources */,
+				1FF7FD5E8A064A8096365401 /* VariantPopover.swift in Sources */,
+				56BB4D3CF9FA488B936F803F /* HapticsService.swift in Sources */,
 				F1849601682D379FCC274353 /* KeyboardViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
