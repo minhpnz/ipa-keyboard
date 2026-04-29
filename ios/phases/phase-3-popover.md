@@ -650,8 +650,8 @@ backgrounding, incoming call, Control Center swipe-down."
 
 ## Phase 3 exit checklist
 
-- [ ] `swift test --filter TouchStateTests` — 6 tests pass
-- [ ] `xcodebuild test` — popover snapshot tests GREEN on iPhone SE, iPhone 15, iPad floating width
+- [x] `swift test --filter TouchStateTests` — 6 tests pass
+- [x] `xcodebuild test` — popover snapshot tests GREEN on iPhone SE, iPhone 15, iPad floating width
 - [ ] Manual: long-press `a`, popover shows, drag across variants, release on each → correct variant inserted
 - [ ] Manual: long-press `a`, release over nothing → no text inserted
 - [ ] Manual: long-press `a`, hit home button → popover dismisses, no phantom insert on return
