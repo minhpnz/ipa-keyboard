@@ -34,7 +34,7 @@ struct KeyView: View {
         .scaleEffect(isPressed ? 0.96 : 1)
         .animation(.easeOut(duration: 0.08), value: isPressed)
         .gesture(
-            DragGesture(minimumDistance: 0, coordinateSpace: .global)
+            DragGesture(minimumDistance: 0, coordinateSpace: .named("keyboardRoot"))
                 .onChanged { value in
                     if !isPressed {
                         isPressed = true

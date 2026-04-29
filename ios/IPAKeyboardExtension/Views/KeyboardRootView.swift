@@ -13,6 +13,7 @@ struct KeyboardRootView: View {
     @State private var popoverVariants: [String] = []
     @State private var popoverKeyFrame: CGRect = .zero
     @State private var popoverSelection: Int? = nil
+    @State private var keyboardSize: CGSize = .zero
 
     private let row1: [Character] = Array("qwertyuiop")
     private let row2: [Character] = Array("asdfghjkl")
@@ -23,10 +24,13 @@ struct KeyboardRootView: View {
         GeometryReader { geo in
             ZStack(alignment: .topLeading) {
                 keyboardBody(in: geo.size)
-                if let key = popoverKey {
-                    popoverOverlay(key: key, in: CGRect(origin: .zero, size: geo.size))
+                if popoverKey != nil {
+                    popoverOverlay(in: CGRect(origin: .zero, size: geo.size))
                 }
             }
+            .coordinateSpace(name: "keyboardRoot")
+            .onAppear { keyboardSize = geo.size }
+            .onChange(of: geo.size) { newValue in keyboardSize = newValue }
         }
         .frame(height: totalHeight)
         .background(Color(uiColor: .systemGray6))
@@ -34,10 +38,10 @@ struct KeyboardRootView: View {
 
     private func keyboardBody(in size: CGSize) -> some View {
         VStack(spacing: 6) {
-            row(row1, rowIndex: 0)
+            row(row1)
             HStack {
                 Spacer(minLength: 18)
-                row(row2, rowIndex: 1)
+                row(row2)
                 Spacer(minLength: 18)
             }
             row3Bar
@@ -47,7 +51,7 @@ struct KeyboardRootView: View {
         .padding(.horizontal, 4)
     }
 
-    private func row(_ keys: [Character], rowIndex: Int) -> some View {
+    private func row(_ keys: [Character]) -> some View {
         HStack(spacing: 5) {
             ForEach(Array(keys.enumerated()), id: \.offset) { _, key in
                 keyCell(key)
@@ -77,27 +81,16 @@ struct KeyboardRootView: View {
                 label: isShifted ? String(key).uppercased() : String(key),
                 style: .letter,
                 showsDot: dotted,
-                onPressBegan: { beginPress(on: key, frame: cellGeo.frame(in: .local)) },
-                onDrag: { point in drag(to: point, cellOrigin: cellGeo.frame(in: .global).origin) },
+                onPressBegan: { beginPress(on: key, frame: cellGeo.frame(in: .named("keyboardRoot"))) },
+                onDrag: { point in drag(to: point) },
                 onPressEnded: { _ in endPress() },
-                onTap: { tap(key) }
+                onTap: {}
             )
         }
         .frame(maxWidth: .infinity)
     }
 
     // MARK: - Gesture dispatch
-
-    private func tap(_ key: Character) {
-        // Tap fires iff no popover is visible. The plain-tap path is
-        // already taken care of by onPressEnded -> endPress; this is here
-        // for future-proofing when onTap fires without any drag.
-        if popoverKey == nil {
-            let s = isShifted ? String(key).uppercased() : String(key)
-            onInsertText(s)
-            if isShifted { isShifted = false }
-        }
-    }
 
     private func beginPress(on key: Character, frame: CGRect) {
         let token = touch.begin(key: key)
@@ -113,7 +106,7 @@ struct KeyboardRootView: View {
         }
     }
 
-    private func drag(to point: CGPoint, cellOrigin: CGPoint) {
+    private func drag(to point: CGPoint) {
         guard popoverKey != nil else { return }
         let variantCount = popoverVariants.count
         guard variantCount > 0 else { return }
@@ -121,7 +114,7 @@ struct KeyboardRootView: View {
         let origin = LayoutEngine.popoverRect(
             keyFrame: popoverKeyFrame,
             popoverSize: CGSize(width: CGFloat(variantCount) * bucketWidth + 16, height: 52),
-            keyboardBounds: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: totalHeight)
+            keyboardBounds: CGRect(origin: .zero, size: keyboardSize)
         ).origin
         let relX = point.x - origin.x
         let index = Int((relX) / bucketWidth)
@@ -129,7 +122,7 @@ struct KeyboardRootView: View {
     }
 
     private func endPress() {
-        if let key = popoverKey, let sel = popoverSelection {
+        if popoverKey != nil, let sel = popoverSelection {
             let variant = popoverVariants[sel]
             onInsertText(variant)
             HapticsService.shared.selection()
@@ -147,7 +140,7 @@ struct KeyboardRootView: View {
     // MARK: - Overlay
 
     @ViewBuilder
-    private func popoverOverlay(key: Character, in bounds: CGRect) -> some View {
+    private func popoverOverlay(in bounds: CGRect) -> some View {
         let popoverSize = CGSize(
             width: CGFloat(popoverVariants.count) * 44 + 16,
             height: 52
