@@ -24,10 +24,9 @@ final class PopoverSnapshotTests: XCTestCase {
         variants: [String],
         selectedIndex: Int? = nil
     ) -> some View {
-        let popoverSize = CGSize(width: CGFloat(variants.count) * 44 + 16, height: 52)
         let rect = LayoutEngine.popoverRect(
             keyFrame: keyFrame,
-            popoverSize: popoverSize,
+            popoverSize: LayoutEngine.popoverSize(variantCount: variants.count),
             keyboardBounds: CGRect(origin: .zero, size: size)
         )
         return ZStack(alignment: .topLeading) {

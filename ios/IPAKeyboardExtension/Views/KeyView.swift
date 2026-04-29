@@ -76,10 +76,10 @@ struct KeyView: View {
         }
     }
 
-    // TODO(phase-3): dotted keys (showsDot=true) should announce "Key a, has variants".
     private var accessibilityName: String {
         switch style {
-        case .letter: return "Key \(label)"
+        case .letter:
+            return showsDot ? "Key \(label), has variants" : "Key \(label)"
         case .function:
             if label == "space" { return "Space" }
             if label == "🌐" { return "Next keyboard" }

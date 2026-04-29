@@ -120,14 +120,13 @@ struct KeyboardRootView: View {
         guard popoverKey != nil else { return }
         let variantCount = popoverVariants.count
         guard variantCount > 0 else { return }
-        let bucketWidth: CGFloat = 44
         let origin = LayoutEngine.popoverRect(
             keyFrame: popoverKeyFrame,
-            popoverSize: CGSize(width: CGFloat(variantCount) * bucketWidth + 16, height: 52),
+            popoverSize: LayoutEngine.popoverSize(variantCount: variantCount),
             keyboardBounds: CGRect(origin: .zero, size: keyboardSize)
         ).origin
         let relX = point.x - origin.x
-        let index = Int((relX) / bucketWidth)
+        let index = Int(relX / LayoutEngine.popoverBucketWidth)
         popoverSelection = (0..<variantCount).contains(index) ? index : nil
     }
 
@@ -151,13 +150,9 @@ struct KeyboardRootView: View {
 
     @ViewBuilder
     private func popoverOverlay(in bounds: CGRect) -> some View {
-        let popoverSize = CGSize(
-            width: CGFloat(popoverVariants.count) * 44 + 16,
-            height: 52
-        )
         let rect = LayoutEngine.popoverRect(
             keyFrame: popoverKeyFrame,
-            popoverSize: popoverSize,
+            popoverSize: LayoutEngine.popoverSize(variantCount: popoverVariants.count),
             keyboardBounds: bounds
         )
         VariantPopover(variants: popoverVariants, selectedIndex: popoverSelection)
