@@ -87,6 +87,7 @@ targets:
     sources:
       - path: Tests/KeyboardExtensionSnapshotTests
       - path: IPAKeyboardExtension/Views
+      - path: IPAKeyboardExtension/Services
     settings:
       base:
         IPHONEOS_DEPLOYMENT_TARGET: "16.0"
