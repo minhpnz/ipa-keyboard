@@ -34,6 +34,16 @@ struct KeyboardRootView: View {
         }
         .frame(height: totalHeight)
         .background(Color(uiColor: .systemGray6))
+        .onReceive(NotificationCenter.default.publisher(for: .ipaKeyboardShouldCancelGesture)) { _ in
+            cancelInFlightGesture()
+        }
+    }
+
+    private func cancelInFlightGesture() {
+        touch.cancel()
+        popoverKey = nil
+        popoverVariants = []
+        popoverSelection = nil
     }
 
     private func keyboardBody(in size: CGSize) -> some View {
