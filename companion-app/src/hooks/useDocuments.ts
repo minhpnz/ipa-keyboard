@@ -111,8 +111,10 @@ export function useDocuments() {
     const doc = documents.find((d) => d.id === activeId);
     if (!doc) return;
 
-    let filePath = doc.path;
-    if (!filePath) {
+    let filePath: string;
+    if (doc.path) {
+      filePath = doc.path;
+    } else {
       const result = await save({
         defaultPath: `${doc.name}.txt`,
         filters: [{ name: "Text Files", extensions: ["txt"] }],
@@ -127,7 +129,7 @@ export function useDocuments() {
     setDocuments((docs) =>
       docs.map((d) =>
         d.id === activeId
-          ? { ...d, path: filePath!, name: fileName, isDirty: false }
+          ? { ...d, path: filePath, name: fileName, isDirty: false }
           : d
       )
     );
