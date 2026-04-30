@@ -558,7 +558,7 @@ instead of literals. Makes intent reviewable and policy testable."
 - [x] Snapshot tests for numbers and symbols layers pass (light + dark for numbers, iPad portrait for both)
 - [ ] Manual: `123` → numbers layer, `#+=` → symbols, `ABC` → back to alpha, all transitions clean
 - [ ] Manual: typing numbers / punctuation inserts correct characters
-- [ ] Manual: first 3 keyboard activations show the coach-mark banner; 4th does not
+- [ ] Manual: first keyboard activation shows the coach-mark banner; 2nd onward does not
 - [ ] Manual: any key press or keyboard-hide dismisses the banner immediately
 - [ ] `UserDefaults.standard` write for `activationCount` persists across simulator relaunches
 

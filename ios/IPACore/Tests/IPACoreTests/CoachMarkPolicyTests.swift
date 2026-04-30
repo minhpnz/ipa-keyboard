@@ -3,14 +3,13 @@ import XCTest
 
 final class CoachMarkPolicyTests: XCTestCase {
 
-    func test_showOnFirstThreeActivations() {
+    func test_showOnFirstActivation() {
         XCTAssertTrue(CoachMarkPolicy.shouldShow(forActivationCount: 1))
-        XCTAssertTrue(CoachMarkPolicy.shouldShow(forActivationCount: 2))
-        XCTAssertTrue(CoachMarkPolicy.shouldShow(forActivationCount: 3))
     }
 
     func test_hiddenForLaterActivations() {
-        XCTAssertFalse(CoachMarkPolicy.shouldShow(forActivationCount: 4))
+        XCTAssertFalse(CoachMarkPolicy.shouldShow(forActivationCount: 2))
+        XCTAssertFalse(CoachMarkPolicy.shouldShow(forActivationCount: 3))
         XCTAssertFalse(CoachMarkPolicy.shouldShow(forActivationCount: 500))
     }
 

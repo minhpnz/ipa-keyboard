@@ -5,8 +5,9 @@ import Foundation
 /// every time the keyboard activates and uses `autoDismissDelay` for the
 /// auto-fade timer.
 public enum CoachMarkPolicy {
-    /// Show the banner on the first N keyboard activations.
-    public static let showThreshold: Int = 3
+    /// Show the banner on the first N keyboard activations. Currently 1 —
+    /// once is enough; subsequent activations would feel like nagging.
+    public static let showThreshold: Int = 1
 
     /// Auto-dismiss the banner after this many seconds if the user has not
     /// already dismissed it by tapping a key.
