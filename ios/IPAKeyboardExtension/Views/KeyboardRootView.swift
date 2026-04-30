@@ -21,6 +21,7 @@ struct KeyboardRootView: View {
     @State private var popoverKeyFrame: CGRect = .zero
     @State private var popoverSelection: Int? = nil
     @State private var keyboardSize: CGSize = .zero
+    @State private var coachMarkVisible: Bool = false
 
     private let row1: [Character] = Array("qwertyuiop")
     private let row2: [Character] = Array("asdfghjkl")
@@ -42,6 +43,16 @@ struct KeyboardRootView: View {
                 if popoverKey != nil {
                     popoverOverlay(in: CGRect(origin: .zero, size: geo.size))
                 }
+                if coachMarkVisible {
+                    VStack {
+                        CoachMarkBanner()
+                            .padding(.top, 2)
+                        Spacer()
+                    }
+                    .frame(width: geo.size.width)
+                    .transition(.opacity)
+                    .allowsHitTesting(false)
+                }
             }
             .coordinateSpace(name: "keyboardRoot")
             .onAppear { keyboardSize = geo.size }
@@ -52,6 +63,27 @@ struct KeyboardRootView: View {
         .onReceive(NotificationCenter.default.publisher(for: .ipaKeyboardShouldCancelGesture)) { _ in
             cancelInFlightGesture()
         }
+        .onReceive(NotificationCenter.default.publisher(for: .ipaKeyboardActivationCountChanged)) { note in
+            handleActivationCount(note.userInfo?["count"] as? Int ?? 0)
+        }
+        .onReceive(NotificationCenter.default.publisher(for: UIResponder.keyboardWillHideNotification)) { _ in
+            coachMarkVisible = false
+        }
+    }
+
+    private func handleActivationCount(_ count: Int) {
+        guard CoachMarkPolicy.shouldShow(forActivationCount: count) else { return }
+        withAnimation(.easeIn(duration: 0.2)) { coachMarkVisible = true }
+        DispatchQueue.main.asyncAfter(deadline: .now() + CoachMarkPolicy.autoDismissDelay) {
+            withAnimation(.easeOut(duration: 0.2)) { coachMarkVisible = false }
+        }
+    }
+
+    /// Any user interaction with the keyboard dismisses the banner early.
+    /// No-op when the banner isn't visible so it's safe to call on every tap.
+    private func dismissCoachMarkIfVisible() {
+        guard coachMarkVisible else { return }
+        withAnimation(.easeOut(duration: 0.2)) { coachMarkVisible = false }
     }
 
     private func cancelInFlightGesture() {
@@ -70,19 +102,19 @@ struct KeyboardRootView: View {
                 .padding(.horizontal, Self.horizontalPadding)
         case .numbers:
             NumbersLayerView(
-                onInsertText: onInsertText,
-                onDeleteBackward: onDeleteBackward,
-                onSwitchToAlpha: { layer = .alpha },
-                onSwitchToSymbols: { layer = .symbols }
+                onInsertText: { dismissCoachMarkIfVisible(); onInsertText($0) },
+                onDeleteBackward: { dismissCoachMarkIfVisible(); onDeleteBackward() },
+                onSwitchToAlpha: { dismissCoachMarkIfVisible(); layer = .alpha },
+                onSwitchToSymbols: { dismissCoachMarkIfVisible(); layer = .symbols }
             )
             .padding(.vertical, 6)
             .padding(.horizontal, Self.horizontalPadding)
         case .symbols:
             SymbolsLayerView(
-                onInsertText: onInsertText,
-                onDeleteBackward: onDeleteBackward,
-                onSwitchToAlpha: { layer = .alpha },
-                onSwitchToNumbers: { layer = .numbers }
+                onInsertText: { dismissCoachMarkIfVisible(); onInsertText($0) },
+                onDeleteBackward: { dismissCoachMarkIfVisible(); onDeleteBackward() },
+                onSwitchToAlpha: { dismissCoachMarkIfVisible(); layer = .alpha },
+                onSwitchToNumbers: { dismissCoachMarkIfVisible(); layer = .numbers }
             )
             .padding(.vertical, 6)
             .padding(.horizontal, Self.horizontalPadding)
@@ -116,10 +148,12 @@ struct KeyboardRootView: View {
 
     private func row3Bar(letterW: CGFloat, shiftW: CGFloat) -> some View {
         HStack(spacing: Self.keySpacing) {
-            KeyView(label: "⇧", style: .shift, showsDot: false, onTap: { isShifted.toggle() })
+            KeyView(label: "⇧", style: .shift, showsDot: false,
+                    onTap: { dismissCoachMarkIfVisible(); isShifted.toggle() })
                 .frame(width: shiftW)
             row(row3, letterW: letterW)
-            KeyView(label: "⌫", style: .function, showsDot: false, onTap: onDeleteBackward)
+            KeyView(label: "⌫", style: .function, showsDot: false,
+                    onTap: { dismissCoachMarkIfVisible(); onDeleteBackward() })
                 .frame(width: shiftW)
         }
         .frame(height: rowHeight)
@@ -145,6 +179,7 @@ struct KeyboardRootView: View {
     // MARK: - Gesture dispatch
 
     private func beginPress(on key: Character, frame: CGRect) {
+        dismissCoachMarkIfVisible()
         let token = touch.begin(key: key)
         if Self.dotted.contains(key), let variants = IPAMapping.variants[key] {
             popoverVariants = variants
@@ -213,13 +248,13 @@ struct KeyboardRootView: View {
         let returnW = letterW * 2
         return HStack(spacing: Self.keySpacing) {
             KeyView(label: "123", style: .function, showsDot: false,
-                    onTap: { layer = .numbers })
+                    onTap: { dismissCoachMarkIfVisible(); layer = .numbers })
                 .frame(width: switchW)
             KeyView(label: "space", style: .function, showsDot: false,
-                    onTap: { onInsertText(" ") })
+                    onTap: { dismissCoachMarkIfVisible(); onInsertText(" ") })
                 .frame(maxWidth: .infinity)
             KeyView(label: "return", style: .returnKey, showsDot: false,
-                    onTap: { onInsertText("\n") })
+                    onTap: { dismissCoachMarkIfVisible(); onInsertText("\n") })
                 .frame(width: returnW)
         }
         .frame(height: rowHeight)

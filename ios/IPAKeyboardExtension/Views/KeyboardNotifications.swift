@@ -10,4 +10,10 @@ extension Notification.Name {
     /// `Views/` and `Services/`, not the VC — can see the symbol when it
     /// builds `KeyboardRootView`.
     static let ipaKeyboardShouldCancelGesture = Notification.Name("ipa.gesture.cancel")
+
+    /// Posted by `KeyboardViewController.viewWillAppear` after bumping the
+    /// per-install activation counter. Carries the new count in
+    /// `userInfo["count"]`. `KeyboardRootView` consults `CoachMarkPolicy` to
+    /// decide whether to flash the coach-mark banner.
+    static let ipaKeyboardActivationCountChanged = Notification.Name("ipa.activationCount.changed")
 }
