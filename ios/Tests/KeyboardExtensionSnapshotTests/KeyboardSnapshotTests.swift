@@ -55,4 +55,54 @@ final class KeyboardSnapshotTests: XCTestCase {
                        as: .image(size: CGSize(width: 320, height: 260),
                                   traits: .init(userInterfaceStyle: .light)))
     }
+
+    // MARK: - Numbers / symbols layers
+
+    private func numbers() -> some View {
+        NumbersLayerView(
+            onInsertText: { _ in },
+            onDeleteBackward: {},
+            onSwitchToAlpha: {},
+            onSwitchToSymbols: {}
+        )
+    }
+
+    private func symbols() -> some View {
+        SymbolsLayerView(
+            onInsertText: { _ in },
+            onDeleteBackward: {},
+            onSwitchToAlpha: {},
+            onSwitchToNumbers: {}
+        )
+    }
+
+    func test_numbers_iPhone15_light() {
+        let view = numbers().frame(width: 393, height: 260)
+        assertSnapshot(of: UIHostingController(rootView: view),
+                       as: .image(on: .iPhone13, traits: .init(userInterfaceStyle: .light)))
+    }
+
+    func test_numbers_iPhone15_dark() {
+        let view = numbers().frame(width: 393, height: 260)
+        assertSnapshot(of: UIHostingController(rootView: view),
+                       as: .image(on: .iPhone13, traits: .init(userInterfaceStyle: .dark)))
+    }
+
+    func test_numbers_iPad_portrait_light() {
+        let view = numbers().frame(width: 820, height: 320)
+        assertSnapshot(of: UIHostingController(rootView: view),
+                       as: .image(on: .iPadMini, traits: .init(userInterfaceStyle: .light)))
+    }
+
+    func test_symbols_iPhone15_light() {
+        let view = symbols().frame(width: 393, height: 260)
+        assertSnapshot(of: UIHostingController(rootView: view),
+                       as: .image(on: .iPhone13, traits: .init(userInterfaceStyle: .light)))
+    }
+
+    func test_symbols_iPad_portrait_light() {
+        let view = symbols().frame(width: 820, height: 320)
+        assertSnapshot(of: UIHostingController(rootView: view),
+                       as: .image(on: .iPadMini, traits: .init(userInterfaceStyle: .light)))
+    }
 }

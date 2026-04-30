@@ -1,12 +1,19 @@
 import SwiftUI
 import IPACore
 
+enum KeyboardLayer {
+    case alpha
+    case numbers   // "123" — digits + common punctuation
+    case symbols   // "#+=" — symbols
+}
+
 struct KeyboardRootView: View {
 
     let onInsertText: (String) -> Void
     let onDeleteBackward: () -> Void
     let onAdvanceInputMode: () -> Void
 
+    @State private var layer: KeyboardLayer = .alpha
     @State private var isShifted: Bool = false
     @State private var touch = TouchState()
     @State private var popoverKey: Character? = nil
@@ -54,7 +61,35 @@ struct KeyboardRootView: View {
         popoverSelection = nil
     }
 
+    @ViewBuilder
     private func keyboardBody(in size: CGSize) -> some View {
+        switch layer {
+        case .alpha:
+            alphaContent(in: size)
+                .padding(.vertical, 6)
+                .padding(.horizontal, Self.horizontalPadding)
+        case .numbers:
+            NumbersLayerView(
+                onInsertText: onInsertText,
+                onDeleteBackward: onDeleteBackward,
+                onSwitchToAlpha: { layer = .alpha },
+                onSwitchToSymbols: { layer = .symbols }
+            )
+            .padding(.vertical, 6)
+            .padding(.horizontal, Self.horizontalPadding)
+        case .symbols:
+            SymbolsLayerView(
+                onInsertText: onInsertText,
+                onDeleteBackward: onDeleteBackward,
+                onSwitchToAlpha: { layer = .alpha },
+                onSwitchToNumbers: { layer = .numbers }
+            )
+            .padding(.vertical, 6)
+            .padding(.horizontal, Self.horizontalPadding)
+        }
+    }
+
+    private func alphaContent(in size: CGSize) -> some View {
         let available = size.width - Self.horizontalPadding * 2
         let letterW = (available - Self.keySpacing * 9) / 10
         let shiftW = letterW * Self.shiftWidthMultiple
@@ -65,10 +100,8 @@ struct KeyboardRootView: View {
             row(row2, letterW: letterW)
                 .padding(.horizontal, row2Inset)
             row3Bar(letterW: letterW, shiftW: shiftW)
-            functionRow(letterW: letterW)
+            alphaFunctionRow(letterW: letterW)
         }
-        .padding(.vertical, 6)
-        .padding(.horizontal, Self.horizontalPadding)
     }
 
     private func row(_ keys: [Character], letterW: CGFloat) -> some View {
@@ -172,19 +205,21 @@ struct KeyboardRootView: View {
 
     // MARK: - Function row + sizing
 
-    private func functionRow(letterW: CGFloat) -> some View {
+    private func alphaFunctionRow(letterW: CGFloat) -> some View {
         // No in-keyboard 🌐: iOS 17+ surfaces the input-mode switcher in the
         // system bar below the keyboard, so a duplicate globe key is wasted
-        // real estate. (advanceToNextInputMode is still wired on the VC for
-        // completeness; users invoke it via the system bar.)
-        //
-        // No 123 either: the numbers/symbols layer arrives in Phase 4. Hiding
-        // the key until then avoids a dead button.
+        // real estate. advanceToNextInputMode is still wired on the VC.
+        let switchW = letterW * Self.shiftWidthMultiple
         let returnW = letterW * 2
         return HStack(spacing: Self.keySpacing) {
-            KeyView(label: "space", style: .function, showsDot: false, onTap: { onInsertText(" ") })
+            KeyView(label: "123", style: .function, showsDot: false,
+                    onTap: { layer = .numbers })
+                .frame(width: switchW)
+            KeyView(label: "space", style: .function, showsDot: false,
+                    onTap: { onInsertText(" ") })
                 .frame(maxWidth: .infinity)
-            KeyView(label: "return", style: .returnKey, showsDot: false, onTap: { onInsertText("\n") })
+            KeyView(label: "return", style: .returnKey, showsDot: false,
+                    onTap: { onInsertText("\n") })
                 .frame(width: returnW)
         }
         .frame(height: rowHeight)
