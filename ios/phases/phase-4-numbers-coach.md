@@ -554,8 +554,8 @@ instead of literals. Makes intent reviewable and policy testable."
 
 ## Phase 4 exit checklist
 
-- [ ] `swift test` — all existing tests plus `CoachMarkPolicyTests` green
-- [ ] Snapshot tests for numbers and symbols layers pass (light + dark for numbers)
+- [x] `swift test` — all existing tests plus `CoachMarkPolicyTests` green
+- [x] Snapshot tests for numbers and symbols layers pass (light + dark for numbers, iPad portrait for both)
 - [ ] Manual: `123` → numbers layer, `#+=` → symbols, `ABC` → back to alpha, all transitions clean
 - [ ] Manual: typing numbers / punctuation inserts correct characters
 - [ ] Manual: first 3 keyboard activations show the coach-mark banner; 4th does not
