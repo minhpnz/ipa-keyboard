@@ -15,8 +15,9 @@ struct KeyView: View {
 
     var body: some View {
         ZStack(alignment: .topTrailing) {
-            RoundedRectangle(cornerRadius: 5, style: .continuous)
+            RoundedRectangle(cornerRadius: 6, style: .continuous)
                 .fill(background)
+                .shadow(color: Color.black.opacity(0.28), radius: 0, x: 0, y: 1)
                 .overlay(
                     Text(label)
                         .font(font)
@@ -57,10 +58,12 @@ struct KeyView: View {
 
     private var background: Color {
         switch style {
-        case .letter: return Color(uiColor: .systemGray4)
-        case .function: return Color(uiColor: .systemGray3)
+        // Match the system keyboard: letter keys are near-white in light
+        // mode and dark in dark mode (via .systemBackground). Function and
+        // shift sit on a darker gray so they read as "modal" keys.
+        case .letter: return Color(uiColor: .systemBackground)
+        case .function, .shift: return Color(uiColor: .systemGray3)
         case .returnKey: return Color.ipaAccent
-        case .shift: return Color(uiColor: .systemGray3)
         }
     }
 
