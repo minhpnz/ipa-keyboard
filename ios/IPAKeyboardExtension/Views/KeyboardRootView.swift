@@ -20,6 +20,14 @@ struct KeyboardRootView: View {
     private let row3: [Character] = Array("zxcvbnm")
     private static let dotted: Set<Character> = Set(IPAMapping.dottedKeys)
 
+    // Layout constants — same values as the pre-popover-wiring layer
+    // (commit bed47dc). Row 1 has 10 letters and 9 gaps; shift/backspace
+    // are 1.25× a letter so row 3 letters end up the same width as the
+    // others rather than getting squeezed into 1/3 of the row.
+    private static let horizontalPadding: CGFloat = 4
+    private static let keySpacing: CGFloat = 5
+    private static let shiftWidthMultiple: CGFloat = 1.25
+
     var body: some View {
         GeometryReader { geo in
             ZStack(alignment: .topLeading) {
@@ -34,41 +42,52 @@ struct KeyboardRootView: View {
         }
         .frame(height: totalHeight)
         .background(Color(uiColor: .systemGray6))
+        .onReceive(NotificationCenter.default.publisher(for: .ipaKeyboardShouldCancelGesture)) { _ in
+            cancelInFlightGesture()
+        }
+    }
+
+    private func cancelInFlightGesture() {
+        touch.cancel()
+        popoverKey = nil
+        popoverVariants = []
+        popoverSelection = nil
     }
 
     private func keyboardBody(in size: CGSize) -> some View {
-        VStack(spacing: 6) {
-            row(row1)
-            HStack {
-                Spacer(minLength: 18)
-                row(row2)
-                Spacer(minLength: 18)
-            }
-            row3Bar
-            functionRow
+        let available = size.width - Self.horizontalPadding * 2
+        let letterW = (available - Self.keySpacing * 9) / 10
+        let shiftW = letterW * Self.shiftWidthMultiple
+        let row2Inset = (letterW + Self.keySpacing) / 2
+
+        return VStack(spacing: 6) {
+            row(row1, letterW: letterW)
+            row(row2, letterW: letterW)
+                .padding(.horizontal, row2Inset)
+            row3Bar(letterW: letterW, shiftW: shiftW)
+            functionRow(letterW: letterW)
         }
         .padding(.vertical, 6)
-        .padding(.horizontal, 4)
+        .padding(.horizontal, Self.horizontalPadding)
     }
 
-    private func row(_ keys: [Character]) -> some View {
-        HStack(spacing: 5) {
+    private func row(_ keys: [Character], letterW: CGFloat) -> some View {
+        HStack(spacing: Self.keySpacing) {
             ForEach(Array(keys.enumerated()), id: \.offset) { _, key in
                 keyCell(key)
+                    .frame(width: letterW)
             }
         }
         .frame(height: rowHeight)
     }
 
-    private var row3Bar: some View {
-        HStack(spacing: 5) {
+    private func row3Bar(letterW: CGFloat, shiftW: CGFloat) -> some View {
+        HStack(spacing: Self.keySpacing) {
             KeyView(label: "⇧", style: .shift, showsDot: false, onTap: { isShifted.toggle() })
-            HStack(spacing: 5) {
-                ForEach(Array(row3.enumerated()), id: \.offset) { _, key in
-                    keyCell(key)
-                }
-            }
+                .frame(width: shiftW)
+            row(row3, letterW: letterW)
             KeyView(label: "⌫", style: .function, showsDot: false, onTap: onDeleteBackward)
+                .frame(width: shiftW)
         }
         .frame(height: rowHeight)
     }
@@ -110,14 +129,13 @@ struct KeyboardRootView: View {
         guard popoverKey != nil else { return }
         let variantCount = popoverVariants.count
         guard variantCount > 0 else { return }
-        let bucketWidth: CGFloat = 44
         let origin = LayoutEngine.popoverRect(
             keyFrame: popoverKeyFrame,
-            popoverSize: CGSize(width: CGFloat(variantCount) * bucketWidth + 16, height: 52),
+            popoverSize: LayoutEngine.popoverSize(variantCount: variantCount),
             keyboardBounds: CGRect(origin: .zero, size: keyboardSize)
         ).origin
         let relX = point.x - origin.x
-        let index = Int((relX) / bucketWidth)
+        let index = Int(relX / LayoutEngine.popoverBucketWidth)
         popoverSelection = (0..<variantCount).contains(index) ? index : nil
     }
 
@@ -141,13 +159,9 @@ struct KeyboardRootView: View {
 
     @ViewBuilder
     private func popoverOverlay(in bounds: CGRect) -> some View {
-        let popoverSize = CGSize(
-            width: CGFloat(popoverVariants.count) * 44 + 16,
-            height: 52
-        )
         let rect = LayoutEngine.popoverRect(
             keyFrame: popoverKeyFrame,
-            popoverSize: popoverSize,
+            popoverSize: LayoutEngine.popoverSize(variantCount: popoverVariants.count),
             keyboardBounds: bounds
         )
         VariantPopover(variants: popoverVariants, selectedIndex: popoverSelection)
@@ -158,16 +172,20 @@ struct KeyboardRootView: View {
 
     // MARK: - Function row + sizing
 
-    private var functionRow: some View {
-        HStack(spacing: 5) {
-            KeyView(label: "123", style: .function, showsDot: false, onTap: {})
-                .frame(maxWidth: 44, maxHeight: .infinity)
-            KeyView(label: "🌐", style: .function, showsDot: false, onTap: onAdvanceInputMode)
-                .frame(maxWidth: 44, maxHeight: .infinity)
+    private func functionRow(letterW: CGFloat) -> some View {
+        // No in-keyboard 🌐: iOS 17+ surfaces the input-mode switcher in the
+        // system bar below the keyboard, so a duplicate globe key is wasted
+        // real estate. (advanceToNextInputMode is still wired on the VC for
+        // completeness; users invoke it via the system bar.)
+        //
+        // No 123 either: the numbers/symbols layer arrives in Phase 4. Hiding
+        // the key until then avoids a dead button.
+        let returnW = letterW * 2
+        return HStack(spacing: Self.keySpacing) {
             KeyView(label: "space", style: .function, showsDot: false, onTap: { onInsertText(" ") })
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                .frame(maxWidth: .infinity)
             KeyView(label: "return", style: .returnKey, showsDot: false, onTap: { onInsertText("\n") })
-                .frame(maxWidth: 64, maxHeight: .infinity)
+                .frame(width: returnW)
         }
         .frame(height: rowHeight)
     }

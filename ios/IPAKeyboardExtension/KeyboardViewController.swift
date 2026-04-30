@@ -36,4 +36,14 @@ final class KeyboardViewController: UIInputViewController {
         ])
         hostingController = hosting
     }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        NotificationCenter.default.post(name: .ipaKeyboardShouldCancelGesture, object: nil)
+    }
+
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        NotificationCenter.default.post(name: .ipaKeyboardShouldCancelGesture, object: nil)
+        super.viewWillTransition(to: size, with: coordinator)
+    }
 }

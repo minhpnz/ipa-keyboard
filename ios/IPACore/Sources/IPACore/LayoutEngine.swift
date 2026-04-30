@@ -7,6 +7,23 @@ public enum LayoutEngine {
     public static let clipboardDebounceInterval: TimeInterval = 0.3
     public static let popoverPadding: CGFloat = 4
 
+    /// Per-variant horizontal slot inside the popover, used both for layout
+    /// and as the hit-test bucket width while dragging across variants.
+    public static let popoverBucketWidth: CGFloat = 44
+    /// Total popover height (matches `VariantPopover` content + chrome).
+    public static let popoverHeight: CGFloat = 52
+    /// Horizontal chrome (popover container padding ×2) added to the
+    /// summed bucket widths when sizing the popover.
+    public static let popoverHorizontalChrome: CGFloat = 16
+
+    /// Convenience: the popover's outer rect size for `variantCount` items.
+    public static func popoverSize(variantCount: Int) -> CGSize {
+        CGSize(
+            width: CGFloat(variantCount) * popoverBucketWidth + popoverHorizontalChrome,
+            height: popoverHeight
+        )
+    }
+
     /// Compute the popover frame so it is fully inside `keyboardBounds`.
     /// Preference order: above-and-centered → below-and-centered → clamp horizontally.
     public static func popoverRect(
