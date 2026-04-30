@@ -42,14 +42,22 @@ final class KeyboardViewController: UIInputViewController {
         hostingController = hosting
     }
 
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        let count = bumpActivationCount()
-        NotificationCenter.default.post(
-            name: .ipaKeyboardActivationCountChanged,
-            object: nil,
-            userInfo: ["count": count]
-        )
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        // Defer the activation-count bump + notification until *after* iOS has
+        // finished sliding the keyboard up. Doing this work in viewWillAppear
+        // adds visible jank: the View's onReceive schedules `withAnimation`
+        // and `asyncAfter` calls on the same runloop the slide-up is animating
+        // on, and on cold-start the keyboard process is already at peak load.
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.35) { [weak self] in
+            guard let self else { return }
+            let count = self.bumpActivationCount()
+            NotificationCenter.default.post(
+                name: .ipaKeyboardActivationCountChanged,
+                object: nil,
+                userInfo: ["count": count]
+            )
+        }
     }
 
     override func viewWillDisappear(_ animated: Bool) {
