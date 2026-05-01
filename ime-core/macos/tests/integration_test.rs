@@ -128,9 +128,9 @@ fn first_symbol_matches_spec() {
 }
 
 #[test]
-fn cycle_a_three_variants() {
+fn cycle_a_four_variants() {
     let mut engine = default_engine();
-    let cycle: &[&str] = &["æ", "ʌ", "ɑː", "æ"];
+    let cycle: &[&str] = &["æ", "ʌ", "ɑː", "ɑ", "æ"];
     for (idx, expected) in cycle.iter().enumerate() {
         let r = engine.cycle_next("a").unwrap();
         assert_eq!(&r.symbol, expected, "cycle position {idx}");
@@ -148,9 +148,9 @@ fn cycle_e_two_variants() {
 }
 
 #[test]
-fn cycle_i_two_variants() {
+fn cycle_i_three_variants() {
     let mut engine = default_engine();
-    for (idx, expected) in ["ɪ", "iː", "ɪ"].iter().enumerate() {
+    for (idx, expected) in ["ɪ", "iː", "i", "ɪ"].iter().enumerate() {
         let r = engine.cycle_next("i").unwrap();
         assert_eq!(&r.symbol, *expected, "cycle position {idx}");
     }
@@ -281,9 +281,9 @@ fn all_expected_symbols_reachable_exactly() {
     seen.dedup();
 
     let mut expected: Vec<&str> = vec![
-        "æ", "ʌ", "ɑː", // a
+        "æ", "ʌ", "ɑː", "ɑ", // a
         "ə", "ɜː", // e
-        "ɪ", "iː", // i
+        "ɪ", "iː", "i", // i
         "ɒ", "ɔː", // o
         "ʊ", "uː", // u
         "θ", "ð", // t

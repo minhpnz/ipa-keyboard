@@ -12,7 +12,9 @@
       { "symbol": "æ", "example": "Cat", "number": 14 },
       { "symbol": "ʌ", "example": "Up", "number": 15 },
       { "symbol": "ɑː", "example": "Far", "number": 16 },
-      { "symbol": "ɒ", "example": "On", "number": 17 }
+      { "symbol": "ɒ", "example": "On", "number": 17 },
+      { "symbol": "i", "example": "Happy", "number": 90 },
+      { "symbol": "ɑ", "example": "Father", "number": 91 }
     ],
     "diphthongs": [
       { "symbol": "ɪə", "example": "Here", "number": 5 },

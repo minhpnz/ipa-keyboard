@@ -5,9 +5,44 @@ use core_foundation::base::TCFType;
 use core_foundation::runloop::{kCFRunLoopCommonModes, CFRunLoop, CFRunLoopSource};
 use core_graphics::event::{CGEvent, CGEventFlags, EventField};
 use foreign_types_shared::ForeignType;
-use ipa_mapping_engine::MappingEngine;
+use ipa_mapping_engine::{CycleResult, MappingEngine};
 use std::os::raw::c_void;
 use std::sync::{Arc, Mutex};
+
+/// What the injector should do for a successful TryCycle.
+/// Pure value so the decision is unit-testable without CGEvent FFI.
+#[derive(Debug, PartialEq, Eq)]
+pub struct InjectionPlan {
+    /// Backspaces to send before typing `text`.
+    pub backspaces: usize,
+    /// Text to type (UTF-8) after the backspaces.
+    pub text: String,
+}
+
+/// Plan the inject side-effect for a CycleResult.
+///
+/// - **Cycling within the timeout** (`is_replace == true`): erase the IPA
+///   symbol we wrote on the previous press, then type the next one. This is
+///   the existing Ctrl+letter-cycles-variants behavior.
+/// - **Fresh cycle** (`is_replace == false`): erase the *one* character the
+///   user just typed (the trigger letter) and replace it with the IPA
+///   symbol. This is the Vietnamese-IME-style behavior — typing `a` then
+///   Ctrl+a yields `æ`, not `aæ`. Same when the prior char was unrelated:
+///   `r` + Ctrl+a yields `æ`, not `ræ`.
+///
+/// `prev_symbol_len` is the char count of the IPA symbol injected on the
+/// previous press in this cycling group, used only when `is_replace` is true.
+pub fn plan_injection(cycle_result: &CycleResult, prev_symbol_len: usize) -> InjectionPlan {
+    let backspaces = if cycle_result.is_replace {
+        prev_symbol_len
+    } else {
+        1
+    };
+    InjectionPlan {
+        backspaces,
+        text: cycle_result.symbol.clone(),
+    }
+}
 
 // Raw C bindings not exposed by the core-graphics crate
 extern "C" {
@@ -204,12 +239,13 @@ unsafe extern "C" fn tap_callback(
             match result {
                 Some(cycle_result) => {
                     std::mem::forget(cg_event);
-                    if cycle_result.is_replace && state.last_symbol_len > 0 {
-                        injector::delete_backwards(state.last_symbol_len);
+                    let plan = plan_injection(&cycle_result, state.last_symbol_len);
+                    if plan.backspaces > 0 {
+                        injector::delete_backwards(plan.backspaces);
                         std::thread::sleep(std::time::Duration::from_millis(10));
                     }
-                    injector::type_text(&cycle_result.symbol);
-                    state.last_symbol_len = cycle_result.symbol.chars().count();
+                    injector::type_text(&plan.text);
+                    state.last_symbol_len = plan.text.chars().count();
                     std::ptr::null_mut()
                 }
                 None => {
@@ -387,4 +423,68 @@ pub fn run_event_tap(engine: Arc<Mutex<MappingEngine>>) {
     let state_ptr = Box::into_raw(state) as *mut c_void;
     create_and_install_tap(state_ptr);
     CFRunLoop::run_current();
+}
+
+#[cfg(test)]
+mod plan_injection_tests {
+    use super::*;
+
+    fn cycle(symbol: &str, is_replace: bool) -> CycleResult {
+        CycleResult {
+            symbol: symbol.to_string(),
+            is_replace,
+        }
+    }
+
+    /// Fresh cycle (first Ctrl+letter, or after timeout): backspace ONE
+    /// character to consume the trigger letter the user typed
+    /// (Vietnamese-IME-style replacement), then type the IPA symbol.
+    #[test]
+    fn fresh_cycle_eats_one_trigger_char() {
+        let plan = plan_injection(&cycle("æ", false), 0);
+        assert_eq!(
+            plan,
+            InjectionPlan {
+                backspaces: 1,
+                text: "æ".to_string()
+            }
+        );
+    }
+
+    /// Fresh cycle ignores `prev_symbol_len`: even if a stale value is
+    /// carried over, a fresh cycle always backspaces exactly one char.
+    #[test]
+    fn fresh_cycle_ignores_stale_prev_symbol_len() {
+        let plan = plan_injection(&cycle("æ", false), 99);
+        assert_eq!(plan.backspaces, 1);
+        assert_eq!(plan.text, "æ");
+    }
+
+    /// Cycling within timeout: backspace the previous IPA symbol's char
+    /// count (it may be 1 like `æ`, or 2 like `ɑː`/`tʃ`), then type next.
+    #[test]
+    fn cycling_replaces_prior_symbol_one_char() {
+        let plan = plan_injection(&cycle("ʌ", true), 1);
+        assert_eq!(plan.backspaces, 1);
+        assert_eq!(plan.text, "ʌ");
+    }
+
+    #[test]
+    fn cycling_replaces_prior_symbol_two_chars() {
+        // e.g. previous symbol was `ɑː` (2 chars) — we erase both before
+        // typing the next variant.
+        let plan = plan_injection(&cycle("ɑ", true), 2);
+        assert_eq!(plan.backspaces, 2);
+        assert_eq!(plan.text, "ɑ");
+    }
+
+    /// Defensive: if the engine flags `is_replace` but we somehow have
+    /// no prior length recorded, the plan emits zero backspaces (we can't
+    /// guess what to erase).
+    #[test]
+    fn cycling_with_zero_prev_len_emits_no_backspace() {
+        let plan = plan_injection(&cycle("ʌ", true), 0);
+        assert_eq!(plan.backspaces, 0);
+        assert_eq!(plan.text, "ʌ");
+    }
 }

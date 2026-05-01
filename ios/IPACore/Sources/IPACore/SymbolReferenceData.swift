@@ -2,7 +2,7 @@
 // GENERATED — do not edit by hand.
 // Run ios/Scripts/generate-ipa-mapping.sh to regenerate.
 //
-// Source SHA256: 8478880ba2cca147984ea6622455ff45d5c16b3a5ccb012c354d464d5c29675f
+// Source SHA256: bab2c1696cf494bb0ea8114003f103308c362a5c60c418b62eaf4c88c4fa7976
 
 // swiftlint:disable all
 
@@ -21,17 +21,19 @@ public struct SymbolRow: Equatable, Hashable, Sendable {
 public enum SymbolReferenceData {
 
     /// SHA256 of companion-app/src/data/ipa-symbols.json at codegen time.
-    public static let sourceHash: String = "8478880ba2cca147984ea6622455ff45d5c16b3a5ccb012c354d464d5c29675f"
+    public static let sourceHash: String = "bab2c1696cf494bb0ea8114003f103308c362a5c60c418b62eaf4c88c4fa7976"
 
     /// Rows in dottedKeys order, then variant order from default-mappings.json.
     public static let rows: [SymbolRow] = [
         SymbolRow(symbol: "æ", example: "Cat"),
         SymbolRow(symbol: "ʌ", example: "Up"),
         SymbolRow(symbol: "ɑː", example: "Far"),
+        SymbolRow(symbol: "ɑ", example: "Father"),
         SymbolRow(symbol: "ə", example: "Teacher"),
         SymbolRow(symbol: "ɜː", example: "Bird"),
         SymbolRow(symbol: "ɪ", example: "Ship"),
         SymbolRow(symbol: "iː", example: "Sheep"),
+        SymbolRow(symbol: "i", example: "Happy"),
         SymbolRow(symbol: "ɒ", example: "On"),
         SymbolRow(symbol: "ɔː", example: "Door"),
         SymbolRow(symbol: "ʊ", example: "Good"),
