@@ -22,25 +22,52 @@ pub struct InjectionPlan {
 /// Plan the inject side-effect for a CycleResult.
 ///
 /// - **Cycling within the timeout** (`is_replace == true`): erase the IPA
-///   symbol we wrote on the previous press, then type the next one. This is
-///   the existing Ctrl+letter-cycles-variants behavior.
-/// - **Fresh cycle** (`is_replace == false`): erase the *one* character the
-///   user just typed (the trigger letter) and replace it with the IPA
-///   symbol. This is the Vietnamese-IME-style behavior — typing `a` then
-///   Ctrl+a yields `æ`, not `aæ`. Same when the prior char was unrelated:
-///   `r` + Ctrl+a yields `æ`, not `ræ`.
+///   symbol we wrote on the previous press, then type the next one.
+/// - **Fresh cycle** (`is_replace == false`) and the most recent plain
+///   keystroke was the same letter as the trigger: erase that one character
+///   and replace it with the IPA symbol. Vietnamese-IME-style — `a` then
+///   Ctrl+a yields `æ`, not `aæ`.
+/// - **Fresh cycle, prior key was something else (or nothing)**: just type
+///   the IPA symbol. `r` + Ctrl+a yields `ræ`, not `æ`. Avoids spurious
+///   backspaces in empty fields or after non-matching context.
 ///
-/// `prev_symbol_len` is the char count of the IPA symbol injected on the
-/// previous press in this cycling group, used only when `is_replace` is true.
-pub fn plan_injection(cycle_result: &CycleResult, prev_symbol_len: usize) -> InjectionPlan {
-    let backspaces = if cycle_result.is_replace {
-        prev_symbol_len
-    } else {
-        1
-    };
-    InjectionPlan {
-        backspaces,
-        text: cycle_result.symbol.clone(),
+/// `prev_symbol_len` is used only when `is_replace` is true.
+/// `last_typed_letter` is the most recent plain (non-Ctrl) letter the user
+/// typed since the last IPA injection; `None` means they typed something
+/// non-letter (space, punctuation) or nothing.
+pub fn plan_injection(
+    cycle_result: &CycleResult,
+    prev_symbol_len: usize,
+    last_typed_letter: Option<char>,
+    trigger_letter: char,
+) -> InjectionPlan {
+    if cycle_result.is_replace {
+        return InjectionPlan {
+            backspaces: prev_symbol_len,
+            text: cycle_result.symbol.clone(),
+        };
+    }
+    // Fresh cycle (post-timeout or first press):
+    match last_typed_letter {
+        Some(letter) if letter == trigger_letter => {
+            // Match — eat the trigger and type the IPA. Vietnamese-IME style.
+            InjectionPlan {
+                backspaces: 1,
+                text: cycle_result.symbol.clone(),
+            }
+        }
+        _ => {
+            // Non-matching prior letter or no prior context: append the IPA
+            // symbol with no backspace. The earlier backspace+retype scheme
+            // (delete the prior letter, re-type it together with the IPA)
+            // raced badly with browser/VietX keystroke commit ordering and
+            // produced visible doubling like `rræ` when the backspace was
+            // dropped or reinterpreted. Simple append is robust everywhere.
+            InjectionPlan {
+                backspaces: 0,
+                text: cycle_result.symbol.clone(),
+            }
+        }
     }
 }
 
@@ -83,6 +110,11 @@ static mut GLOBAL_TAP: *mut c_void = std::ptr::null_mut();
 struct TapState {
     engine: Arc<Mutex<MappingEngine>>,
     last_symbol_len: usize,
+    /// Most recent plain (non-Ctrl) letter the user typed. Used to decide
+    /// whether a fresh Ctrl+letter should eat the prior char (Vietnamese-IME
+    /// style) or just append. Cleared on space/punctuation/Tab/Return/etc.,
+    /// after each IPA injection, and on IPA toggle.
+    last_typed_letter: Option<char>,
 }
 
 /// Decision a key event demands before any engine side-effects.
@@ -211,6 +243,7 @@ unsafe extern "C" fn tap_callback(
                 engine.reset();
             }
             state.last_symbol_len = 0;
+            state.last_typed_letter = None;
             std::mem::forget(cg_event);
             std::ptr::null_mut()
         }
@@ -221,6 +254,10 @@ unsafe extern "C" fn tap_callback(
                 }
                 state.last_symbol_len = 0;
             }
+            // Track the most recent plain letter typed (or clear if it was
+            // space, punctuation, return, etc.) so a follow-up Ctrl+letter
+            // can decide whether to eat the trigger.
+            state.last_typed_letter = keycode_to_letter(keycode);
             std::mem::forget(cg_event);
             event
         }
@@ -239,19 +276,42 @@ unsafe extern "C" fn tap_callback(
             match result {
                 Some(cycle_result) => {
                     std::mem::forget(cg_event);
-                    let plan = plan_injection(&cycle_result, state.last_symbol_len);
+                    let plan = plan_injection(
+                        &cycle_result,
+                        state.last_symbol_len,
+                        state.last_typed_letter,
+                        letter,
+                    );
                     if plan.backspaces > 0 {
                         injector::delete_backwards(plan.backspaces);
-                        std::thread::sleep(std::time::Duration::from_millis(10));
                     }
-                    injector::type_text(&plan.text);
-                    state.last_symbol_len = plan.text.chars().count();
+                    // Always settle briefly before injecting. Without this,
+                    // the Ctrl modifier state from the suppressed Ctrl+letter
+                    // event can bleed into our injected events.
+                    std::thread::sleep(std::time::Duration::from_millis(10));
+                    // Paste-based injection bypasses the active IME entirely.
+                    // VietX/Telex and other Vietnamese IMEs would intercept
+                    // a Unicode-string keyboard event and drop the IPA char
+                    // as non-Vietnamese; clipboard paste isn't routed through
+                    // the IME pipeline so the chars land verbatim.
+                    injector::paste_text(&plan.text);
+                    // Only the IPA portion is what a subsequent in-timeout
+                    // cycle needs to backspace. Counting `plan.text` would
+                    // over-count if the plan ever prepends/appends extra
+                    // chars (e.g. a re-typed prior letter), causing the next
+                    // cycle to delete user text.
+                    state.last_symbol_len = cycle_result.symbol.chars().count();
+                    // After an IPA injection the prior plain-letter context
+                    // is consumed (or irrelevant); subsequent fresh cycles
+                    // should not eat anything.
+                    state.last_typed_letter = None;
                     std::ptr::null_mut()
                 }
                 None => {
                     // Engine has no IPA mapping for this letter (e.g. Ctrl+F,
                     // Ctrl+K, Ctrl+X). Suppress so the underlying macOS Emacs
-                    // binding doesn't fire and mangle the user's text.
+                    // binding doesn't fire and mangle the user's text. Leave
+                    // last_typed_letter alone — no character was injected.
                     state.last_symbol_len = 0;
                     std::mem::forget(cg_event);
                     std::ptr::null_mut()
@@ -403,6 +463,7 @@ pub fn install_tap(engine: Arc<Mutex<MappingEngine>>) {
     let state = Box::new(TapState {
         engine,
         last_symbol_len: 0,
+        last_typed_letter: None,
     });
     let state_ptr = Box::into_raw(state) as *mut c_void;
 
@@ -419,6 +480,7 @@ pub fn run_event_tap(engine: Arc<Mutex<MappingEngine>>) {
     let state = Box::new(TapState {
         engine,
         last_symbol_len: 0,
+        last_typed_letter: None,
     });
     let state_ptr = Box::into_raw(state) as *mut c_void;
     create_and_install_tap(state_ptr);
@@ -436,12 +498,11 @@ mod plan_injection_tests {
         }
     }
 
-    /// Fresh cycle (first Ctrl+letter, or after timeout): backspace ONE
-    /// character to consume the trigger letter the user typed
-    /// (Vietnamese-IME-style replacement), then type the IPA symbol.
+    /// Fresh cycle, prior plain key was the trigger letter: backspace one
+    /// to consume the user-typed `a` and replace with `æ`.
     #[test]
-    fn fresh_cycle_eats_one_trigger_char() {
-        let plan = plan_injection(&cycle("æ", false), 0);
+    fn fresh_cycle_eats_trigger_when_prior_letter_matches() {
+        let plan = plan_injection(&cycle("æ", false), 0, Some('a'), 'a');
         assert_eq!(
             plan,
             InjectionPlan {
@@ -451,39 +512,64 @@ mod plan_injection_tests {
         );
     }
 
-    /// Fresh cycle ignores `prev_symbol_len`: even if a stale value is
-    /// carried over, a fresh cycle always backspaces exactly one char.
+    /// Fresh cycle, prior plain key was a different letter: simple append.
+    /// `r` then Ctrl+a yields `ræ` by leaving the user's `r` alone and just
+    /// inserting `æ`. The earlier backspace+retype workaround raced with
+    /// browser/VietX keystroke commit ordering and produced `rræ`.
+    #[test]
+    fn fresh_cycle_non_matching_prior_letter_appends_ipa_only() {
+        let plan = plan_injection(&cycle("æ", false), 0, Some('r'), 'a');
+        assert_eq!(plan.backspaces, 0);
+        assert_eq!(plan.text, "æ");
+    }
+
+    /// Fresh cycle with no plain letter context (empty field, after space,
+    /// after a previous IPA injection, etc.): emit no backspace.
+    #[test]
+    fn fresh_cycle_with_no_prior_letter_emits_no_backspace() {
+        let plan = plan_injection(&cycle("æ", false), 0, None, 'a');
+        assert_eq!(plan.backspaces, 0);
+        assert_eq!(plan.text, "æ");
+    }
+
+    /// Fresh cycle ignores `prev_symbol_len` regardless of context — only
+    /// `is_replace == true` consults it.
     #[test]
     fn fresh_cycle_ignores_stale_prev_symbol_len() {
-        let plan = plan_injection(&cycle("æ", false), 99);
+        let plan = plan_injection(&cycle("æ", false), 99, Some('a'), 'a');
         assert_eq!(plan.backspaces, 1);
-        assert_eq!(plan.text, "æ");
     }
 
     /// Cycling within timeout: backspace the previous IPA symbol's char
     /// count (it may be 1 like `æ`, or 2 like `ɑː`/`tʃ`), then type next.
+    /// `last_typed_letter` is irrelevant in this branch.
     #[test]
     fn cycling_replaces_prior_symbol_one_char() {
-        let plan = plan_injection(&cycle("ʌ", true), 1);
+        let plan = plan_injection(&cycle("ʌ", true), 1, None, 'a');
         assert_eq!(plan.backspaces, 1);
         assert_eq!(plan.text, "ʌ");
     }
 
     #[test]
     fn cycling_replaces_prior_symbol_two_chars() {
-        // e.g. previous symbol was `ɑː` (2 chars) — we erase both before
-        // typing the next variant.
-        let plan = plan_injection(&cycle("ɑ", true), 2);
+        let plan = plan_injection(&cycle("ɑ", true), 2, None, 'a');
         assert_eq!(plan.backspaces, 2);
         assert_eq!(plan.text, "ɑ");
     }
 
+    /// Cycling ignores `last_typed_letter` even if it happens to match —
+    /// the symbol-length count is the source of truth when replacing.
+    #[test]
+    fn cycling_ignores_last_typed_letter() {
+        let plan = plan_injection(&cycle("ʌ", true), 1, Some('a'), 'a');
+        assert_eq!(plan.backspaces, 1);
+    }
+
     /// Defensive: if the engine flags `is_replace` but we somehow have
-    /// no prior length recorded, the plan emits zero backspaces (we can't
-    /// guess what to erase).
+    /// no prior length recorded, the plan emits zero backspaces.
     #[test]
     fn cycling_with_zero_prev_len_emits_no_backspace() {
-        let plan = plan_injection(&cycle("ʌ", true), 0);
+        let plan = plan_injection(&cycle("ʌ", true), 0, None, 'a');
         assert_eq!(plan.backspaces, 0);
         assert_eq!(plan.text, "ʌ");
     }
