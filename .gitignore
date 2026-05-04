@@ -31,8 +31,14 @@ dist-ssr/
 # Session / tool caches
 .claude/
 .superpowers/
+.serena/
 memory/
 tool-config/
+
+# Apple credentials — never commit
+*.p8
+*.cer
+*.p12
 
 # Nested git repositories — decide later: submodule vs flatten
 ime-core/shared/

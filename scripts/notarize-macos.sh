@@ -1,10 +1,10 @@
 #!/bin/bash
 set -euo pipefail
 
-# Notarize a macOS app bundle for distribution.
+# Notarize a macOS app bundle or DMG for distribution.
 #
 # Usage:
-#   bash scripts/notarize-macos.sh <path-to-.app>
+#   bash scripts/notarize-macos.sh <path-to-.app-or-.dmg>
 #
 # Authentication (set one of these pairs):
 #
@@ -21,61 +21,75 @@ set -euo pipefail
 APP_PATH="${1:-}"
 
 if [ -z "$APP_PATH" ]; then
-    echo "Usage: $0 <path-to-.app>"
+    echo "Usage: $0 <path-to-.app-or-.dmg>"
     echo ""
-    echo "Example:"
+    echo "Examples:"
     echo "  bash $0 ime-core/macos/build/IPAKeyboard.app"
+    echo "  bash $0 package-release/IPA_Keyboard_0.1.0_universal.dmg"
     exit 1
 fi
 
-if [ ! -d "$APP_PATH" ]; then
-    echo "Error: '$APP_PATH' does not exist or is not a directory"
+# Detect input type. .app bundles need hardened-runtime + zip wrapping;
+# .dmg files are submitted directly and skip the runtime check.
+if [ -d "$APP_PATH" ]; then
+    INPUT_TYPE="app"
+elif [ -f "$APP_PATH" ] && [[ "$APP_PATH" == *.dmg ]]; then
+    INPUT_TYPE="dmg"
+else
+    echo "Error: '$APP_PATH' must be a .app directory or a .dmg file"
     exit 1
 fi
 
-APP_NAME="$(basename "$APP_PATH" .app)"
+APP_NAME="$(basename "$APP_PATH")"
 TEMP_DIR="$(mktemp -d)"
 if [ ! -d "$TEMP_DIR" ]; then
     echo "Error: Failed to create temp directory"
     exit 1
 fi
-ZIP_PATH="$TEMP_DIR/${APP_NAME}.zip"
 LOG_FILE="$TEMP_DIR/notarize.log"
 
 trap 'rm -rf "$TEMP_DIR"' EXIT
 
-echo "=== Notarizing $APP_NAME ==="
+echo "=== Notarizing $APP_NAME ($INPUT_TYPE) ==="
 
 # --- Step 1: Verify code signature ---
 echo ""
 echo "--- Step 1: Verifying code signature ---"
 if ! codesign --verify --deep --strict "$APP_PATH" 2>&1; then
-    echo "Error: App bundle is not properly signed."
-    echo "Run build.sh with APPLE_SIGNING_IDENTITY set first."
+    echo "Error: '$APP_NAME' is not properly signed."
+    echo "Run build-release.sh with APPLE_SIGNING_IDENTITY set first."
     exit 1
 fi
 
-# Check for hardened runtime (required for notarization)
-CODESIGN_INFO="$(codesign -d --verbose=2 "$APP_PATH" 2>&1)"
-if ! echo "$CODESIGN_INFO" | grep -q "flags=.*runtime"; then
-    echo "Error: Hardened runtime is not enabled."
-    echo "Notarization requires --options runtime during signing."
-    echo "Re-run build.sh with APPLE_SIGNING_IDENTITY set."
-    exit 1
+if [ "$INPUT_TYPE" = "app" ]; then
+    # Hardened runtime is required for notarization of executables.
+    CODESIGN_INFO="$(codesign -d --verbose=2 "$APP_PATH" 2>&1)"
+    if ! echo "$CODESIGN_INFO" | grep -q "flags=.*runtime"; then
+        echo "Error: Hardened runtime is not enabled."
+        echo "Notarization requires --options runtime during signing."
+        exit 1
+    fi
+    echo "Signature OK (hardened runtime enabled)"
+else
+    echo "Signature OK (DMG)"
 fi
-echo "Signature OK (hardened runtime enabled)"
 
-# --- Step 2: Create ZIP for submission ---
+# --- Step 2: Prepare submission payload ---
 echo ""
-echo "--- Step 2: Creating submission archive ---"
-ditto -c -k --keepParent "$APP_PATH" "$ZIP_PATH"
-
-# Validate the ZIP archive
-if ! unzip -t "$ZIP_PATH" >/dev/null 2>&1; then
-    echo "Error: Created ZIP archive is corrupt"
-    exit 1
+echo "--- Step 2: Preparing submission payload ---"
+if [ "$INPUT_TYPE" = "app" ]; then
+    SUBMIT_PATH="$TEMP_DIR/$(basename "$APP_PATH" .app).zip"
+    ditto -c -k --keepParent "$APP_PATH" "$SUBMIT_PATH"
+    if ! unzip -t "$SUBMIT_PATH" >/dev/null 2>&1; then
+        echo "Error: Created ZIP archive is corrupt"
+        exit 1
+    fi
+    echo "Archive: $SUBMIT_PATH ($(du -h "$SUBMIT_PATH" | cut -f1))"
+else
+    # notarytool accepts .dmg directly — no wrapping needed.
+    SUBMIT_PATH="$APP_PATH"
+    echo "Submitting DMG directly: $SUBMIT_PATH ($(du -h "$SUBMIT_PATH" | cut -f1))"
 fi
-echo "Archive: $ZIP_PATH ($(du -h "$ZIP_PATH" | cut -f1))"
 
 # --- Step 3: Submit to Apple ---
 echo ""
@@ -128,9 +142,9 @@ else
 fi
 
 echo "Submitting... (this may take several minutes)"
-SUBMIT_OUTPUT="$(xcrun notarytool submit "$ZIP_PATH" \
+SUBMIT_OUTPUT="$(xcrun notarytool submit "$SUBMIT_PATH" \
     "${NOTARIZE_ARGS[@]}" \
-    --wait --timeout 30m 2>&1)" || {
+    --wait --timeout 60m 2>&1)" || {
     echo "Error: Notarization submission failed"
     echo "$SUBMIT_OUTPUT"
     exit 1
@@ -170,14 +184,20 @@ if ! xcrun stapler validate "$APP_PATH" 2>&1; then
     exit 1
 fi
 
-# Gatekeeper assessment
-SPCTL_OUTPUT="$(spctl --assess --type execute --verbose=2 "$APP_PATH" 2>&1)" || true
+# Gatekeeper assessment (use the policy that matches the input type)
+if [ "$INPUT_TYPE" = "app" ]; then
+    SPCTL_TYPE="execute"
+else
+    SPCTL_TYPE="open --context context:primary-signature"
+fi
+# shellcheck disable=SC2086
+SPCTL_OUTPUT="$(spctl --assess --type $SPCTL_TYPE --verbose=2 "$APP_PATH" 2>&1)" || true
 echo "$SPCTL_OUTPUT"
 if echo "$SPCTL_OUTPUT" | grep -qi "rejected\|denied"; then
-    echo "Warning: Gatekeeper rejected the app. Check signing identity and entitlements."
+    echo "Warning: Gatekeeper rejected '$APP_NAME'. Check signing identity and entitlements."
 fi
 
 echo ""
 echo "=== Notarization complete ==="
 echo "Submission ID: $SUBMISSION_ID"
-echo "App is ready for distribution: $APP_PATH"
+echo "Ready for distribution: $APP_PATH"
