@@ -31,11 +31,13 @@ final class AppState: ObservableObject {
     func confirmSetup() {
         hasConfirmedSetup = true
         defaults.set(true, forKey: Keys.hasConfirmedSetup)
+        defaults.synchronize()
     }
 
     func showStepsAgain() {
         hasConfirmedSetup = false
         defaults.set(false, forKey: Keys.hasConfirmedSetup)
+        defaults.synchronize()
     }
 
     func noteTextFieldChanged(_ text: String) {
