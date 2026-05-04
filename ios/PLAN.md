@@ -48,7 +48,7 @@
 - [x] Phase 1 — Foundation
 - [x] Phase 2 — Keyboard alpha layer
 - [x] Phase 3 — Long-press popover
-- [ ] Phase 4 — Numbers / symbols / coach mark
+- [x] Phase 4 — Numbers / symbols / coach mark
 - [ ] Phase 5 — Container app: Setup tab
 - [ ] Phase 6 — Container app: Reference + About
 - [ ] Phase 7 — App Store criteria + CI preflight
