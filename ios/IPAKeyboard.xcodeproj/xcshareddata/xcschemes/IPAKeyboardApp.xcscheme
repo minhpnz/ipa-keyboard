@@ -75,6 +75,16 @@
                ReferencedContainer = "container:IPAKeyboard.xcodeproj">
             </BuildableReference>
          </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "79DB824AA827FA923EE1F908"
+               BuildableName = "IPAKeyboardAppUITests.xctest"
+               BlueprintName = "IPAKeyboardAppUITests"
+               ReferencedContainer = "container:IPAKeyboard.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
       <CommandLineArguments>
       </CommandLineArguments>
