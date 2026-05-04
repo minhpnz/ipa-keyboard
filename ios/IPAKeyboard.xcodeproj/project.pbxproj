@@ -25,6 +25,7 @@
 		3F33B8CD21381C6BCB287292 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BBF0377738F1F843AD673C4 /* AppState.swift */; };
 		0AC9A2BE2AE853EF8969217E /* RootTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93DD506619C5032566FD37EC /* RootTabView.swift */; };
 		505BCA6A5FCA396C46D9F408 /* SetupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16E57EC4B121D8DA717569C5 /* SetupView.swift */; };
+		E0CB147EC3974C2146AB28BB /* TroubleshootingSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4ABC563AD735B4444AE3F6D /* TroubleshootingSheet.swift */; };
 		53CEB000EE206ECE051645E8 /* ReferenceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74A8960183752E5A6B36CA93 /* ReferenceView.swift */; };
 		F1F8728E7889B0034E1603F6 /* AboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A85954E823E35303C4DECB7 /* AboutView.swift */; };
 		5A25354BF910BD90D1B48F56 /* test_iPad_portrait_light.1.png in Resources */ = {isa = PBXBuildFile; fileRef = 40A11B67C23A94CF4366A196 /* test_iPad_portrait_light.1.png */; };
@@ -107,6 +108,7 @@
 		2BBF0377738F1F843AD673C4 /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
 		93DD506619C5032566FD37EC /* RootTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootTabView.swift; sourceTree = "<group>"; };
 		16E57EC4B121D8DA717569C5 /* SetupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupView.swift; sourceTree = "<group>"; };
+		E4ABC563AD735B4444AE3F6D /* TroubleshootingSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TroubleshootingSheet.swift; sourceTree = "<group>"; };
 		74A8960183752E5A6B36CA93 /* ReferenceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReferenceView.swift; sourceTree = "<group>"; };
 		6A85954E823E35303C4DECB7 /* AboutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutView.swift; sourceTree = "<group>"; };
 		19B5C1426F5806C263218151 /* IPAKeyboardApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = IPAKeyboardApp.entitlements; sourceTree = "<group>"; };
@@ -243,6 +245,7 @@
 				74A8960183752E5A6B36CA93 /* ReferenceView.swift */,
 				93DD506619C5032566FD37EC /* RootTabView.swift */,
 				16E57EC4B121D8DA717569C5 /* SetupView.swift */,
+				E4ABC563AD735B4444AE3F6D /* TroubleshootingSheet.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -510,6 +513,7 @@
 				53CEB000EE206ECE051645E8 /* ReferenceView.swift in Sources */,
 				0AC9A2BE2AE853EF8969217E /* RootTabView.swift in Sources */,
 				505BCA6A5FCA396C46D9F408 /* SetupView.swift in Sources */,
+				E0CB147EC3974C2146AB28BB /* TroubleshootingSheet.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
