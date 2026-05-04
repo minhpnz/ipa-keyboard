@@ -48,8 +48,20 @@ pub fn type_text(text: &str) {
 }
 
 /// Write text to the macOS pasteboard via `pbcopy`.
+///
+/// `LANG=en_US.UTF-8` is forced into the child env. Without it, pbcopy
+/// inherits an empty locale (.app bundles launched from Finder don't have
+/// a shell-set LANG) and falls back to a legacy encoding — UTF-8 bytes for
+/// `æ` (0xC3 0xA6) then get tagged Mac-Roman and the receiving app renders
+/// them as `√¶`. The `LC_ALL` override is belt-and-braces for systems where
+/// LC_ALL is set to something non-UTF-8.
 fn write_pasteboard(bytes: &[u8]) -> bool {
-    let mut child = match Command::new("pbcopy").stdin(Stdio::piped()).spawn() {
+    let mut child = match Command::new("pbcopy")
+        .env("LANG", "en_US.UTF-8")
+        .env("LC_ALL", "en_US.UTF-8")
+        .stdin(Stdio::piped())
+        .spawn()
+    {
         Ok(c) => c,
         Err(_) => return false,
     };
@@ -60,10 +72,15 @@ fn write_pasteboard(bytes: &[u8]) -> bool {
 }
 
 /// Read current pasteboard contents via `pbpaste`. Returns `None` if the
-/// pasteboard is empty or non-string (image, file refs, etc.) — in which case
-/// we won't try to restore it.
+/// pasteboard is empty or non-string (image, file refs, etc.) — in which
+/// case we won't try to restore it. UTF-8 locale forced for symmetry with
+/// `write_pasteboard` so a round-trip preserves bytes verbatim.
 fn read_pasteboard() -> Option<Vec<u8>> {
-    let out = Command::new("pbpaste").output().ok()?;
+    let out = Command::new("pbpaste")
+        .env("LANG", "en_US.UTF-8")
+        .env("LC_ALL", "en_US.UTF-8")
+        .output()
+        .ok()?;
     if out.stdout.is_empty() {
         None
     } else {
