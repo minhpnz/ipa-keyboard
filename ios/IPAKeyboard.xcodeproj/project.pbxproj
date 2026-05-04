@@ -21,6 +21,8 @@
 		45596A1AB13C13120F2AC01E /* test_iPhoneSE_portrait_light.1.png in Resources */ = {isa = PBXBuildFile; fileRef = B3586C9AF9DA8F5597C56DBC /* test_iPhoneSE_portrait_light.1.png */; };
 		4D6743BEBF211E129F936DA8 /* test_symbols_iPad_portrait_light.1.png in Resources */ = {isa = PBXBuildFile; fileRef = D780A807CB1F98EBD3484403 /* test_symbols_iPad_portrait_light.1.png */; };
 		535D4DDE6F8853084972150D /* SymbolsLayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12ED08B26B32D8348DA5CA9F /* SymbolsLayerView.swift */; };
+		D44D3EC4DF81EAA824FDB6D5 /* AppStateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81D0DE42DA98613D16B5DAAB /* AppStateTests.swift */; };
+		3F33B8CD21381C6BCB287292 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BBF0377738F1F843AD673C4 /* AppState.swift */; };
 		5A25354BF910BD90D1B48F56 /* test_iPad_portrait_light.1.png in Resources */ = {isa = PBXBuildFile; fileRef = 40A11B67C23A94CF4366A196 /* test_iPad_portrait_light.1.png */; };
 		618D422293F2AC3D499CB67B /* HapticsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12E560D79D6D83A8D761B152 /* HapticsService.swift */; };
 		653A8E85F231F26D25A37723 /* KeyboardSnapshotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88ED51939C048FFEC6ABF95A /* KeyboardSnapshotTests.swift */; };
@@ -97,6 +99,8 @@
 /* Begin PBXFileReference section */
 		12E560D79D6D83A8D761B152 /* HapticsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticsService.swift; sourceTree = "<group>"; };
 		12ED08B26B32D8348DA5CA9F /* SymbolsLayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SymbolsLayerView.swift; sourceTree = "<group>"; };
+		81D0DE42DA98613D16B5DAAB /* AppStateTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStateTests.swift; sourceTree = "<group>"; };
+		2BBF0377738F1F843AD673C4 /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
 		19B5C1426F5806C263218151 /* IPAKeyboardApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = IPAKeyboardApp.entitlements; sourceTree = "<group>"; };
 		19FB8297E10445569709C1F7 /* Color+IPA.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+IPA.swift"; sourceTree = "<group>"; };
 		305AB77147DF720ADD9BCCAB /* test_popover_a_iPhoneSE_narrow_light.1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = test_popover_a_iPhoneSE_narrow_light.1.png; sourceTree = "<group>"; };
@@ -205,6 +209,7 @@
 		1CE862C1368C088275BBB5A7 /* IPAKeyboardAppTests */ = {
 			isa = PBXGroup;
 			children = (
+				81D0DE42DA98613D16B5DAAB /* AppStateTests.swift */,
 				D28F1417574EE2566E094269 /* IPAKeyboardAppTests.swift */,
 			);
 			path = IPAKeyboardAppTests;
@@ -213,6 +218,7 @@
 		2E87F9309A4250A21E939B72 /* IPAKeyboardApp */ = {
 			isa = PBXGroup;
 			children = (
+				2BBF0377738F1F843AD673C4 /* AppState.swift */,
 				CD9C8F8ED919FC02690CD55F /* ContentView.swift */,
 				3AC1BBD0DDB2B559A07C4AAE /* Info.plist */,
 				19B5C1426F5806C263218151 /* IPAKeyboardApp.entitlements */,
@@ -477,6 +483,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3F33B8CD21381C6BCB287292 /* AppState.swift in Sources */,
 				EAC2453C4E0F88F58BBC5758 /* ContentView.swift in Sources */,
 				8E7EAAEC3719434F21B56AA7 /* IPAKeyboardAppApp.swift in Sources */,
 			);
@@ -486,6 +493,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D44D3EC4DF81EAA824FDB6D5 /* AppStateTests.swift in Sources */,
 				F5E43E5962BA14C8C867D8F9 /* IPAKeyboardAppTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
