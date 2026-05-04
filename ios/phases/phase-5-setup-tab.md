@@ -14,7 +14,7 @@
 - Create: `ios/IPAKeyboardApp/AppState.swift`
 - Create: `ios/Tests/IPAKeyboardAppUITests/AppStateTests.swift` (actually unit, not UI — use the `IPAKeyboardAppTests` target Xcode created)
 
-- [ ] **Step 1: Failing tests first**
+- [x] **Step 1: Failing tests first**
 
 `ios/IPAKeyboardAppTests/AppStateTests.swift` (use the default unit-test target Xcode creates with the app):
 
@@ -75,7 +75,7 @@ final class AppStateTests: XCTestCase {
 }
 ```
 
-- [ ] **Step 2: Implement**
+- [x] **Step 2: Implement**
 
 `ios/IPAKeyboardApp/AppState.swift`:
 
@@ -130,12 +130,12 @@ final class AppState: ObservableObject {
 }
 ```
 
-- [ ] **Step 3: Run tests**
+- [x] **Step 3: Run tests**
 
 Run: `xcodebuild test -project ios/IPAKeyboard.xcodeproj -scheme IPAKeyboardApp -destination 'platform=iOS Simulator,name=iPhone 15' -only-testing:IPAKeyboardAppTests/AppStateTests 2>&1 | tail -10`
 Expected: 5 tests pass.
 
-- [ ] **Step 4: Commit**
+- [x] **Step 4: Commit**
 
 ```bash
 git add ios/IPAKeyboardApp/AppState.swift ios/IPAKeyboardAppTests/AppStateTests.swift
@@ -156,7 +156,7 @@ to stay hermetic. sawIpaCharacterInTestField only flips true, never back."
 - Create: `ios/IPAKeyboardApp/Views/AboutView.swift` (stub — fleshed out in Phase 6)
 - Modify: `ios/IPAKeyboardApp/IPAKeyboardAppApp.swift`
 
-- [ ] **Step 1: Write `RootTabView`**
+- [x] **Step 1: Write `RootTabView`**
 
 ```swift
 import SwiftUI
@@ -189,7 +189,7 @@ struct RootTabView: View {
 #Preview { RootTabView() }
 ```
 
-- [ ] **Step 2: Stub the other two views**
+- [x] **Step 2: Stub the other two views**
 
 `ReferenceView.swift`:
 
@@ -222,7 +222,7 @@ struct SetupView: View {
 }
 ```
 
-- [ ] **Step 3: Wire `RootTabView` as the app root**
+- [x] **Step 3: Wire `RootTabView` as the app root**
 
 `IPAKeyboardAppApp.swift`:
 
@@ -239,12 +239,12 @@ struct IPAKeyboardAppApp: App {
 }
 ```
 
-- [ ] **Step 4: Build**
+- [x] **Step 4: Build**
 
 Run: `xcodebuild -project ios/IPAKeyboard.xcodeproj -scheme IPAKeyboardApp -sdk iphonesimulator build | tail -5`
 Expected: success.
 
-- [ ] **Step 5: Commit**
+- [x] **Step 5: Commit**
 
 ```bash
 git add ios/IPAKeyboardApp/
@@ -261,7 +261,7 @@ Default tab driven by AppState.defaultTab (.setup on first launch,
 **Files:**
 - Modify: `ios/IPAKeyboardApp/Views/SetupView.swift`
 
-- [ ] **Step 1: Implement**
+- [x] **Step 1: Implement**
 
 ```swift
 import SwiftUI
@@ -438,12 +438,12 @@ struct SetupView: View {
 }
 ```
 
-- [ ] **Step 2: Build**
+- [x] **Step 2: Build**
 
 Run: `xcodebuild -project ios/IPAKeyboard.xcodeproj -scheme IPAKeyboardApp -sdk iphonesimulator build | tail -5`
 Expected: success. If the `keyWindow` API complains (iOS 16 deprecation), read the keyWindow via `UIApplication.shared.connectedScenes.compactMap(...)` — the block above already uses the recommended form.
 
-- [ ] **Step 3: Visual check in simulator**
+- [x] **Step 3: Visual check in simulator**
 
 Launch the container app. Confirm:
 - "STEP 1 OF 1" eyebrow renders in accent color
@@ -455,7 +455,7 @@ Launch the container app. Confirm:
 - Tapping the troubleshooting link opens… nothing yet (sheet in next task)
 - Tapping "I've done this" collapses the whole layout to "Setup complete" banner
 
-- [ ] **Step 4: Commit**
+- [x] **Step 4: Commit**
 
 ```bash
 git add ios/IPAKeyboardApp/Views/SetupView.swift
@@ -473,7 +473,7 @@ I've done this collapses the screen; Show steps again re-expands."
 **Files:**
 - Create: `ios/IPAKeyboardApp/Views/TroubleshootingSheet.swift`
 
-- [ ] **Step 1: Implement**
+- [x] **Step 1: Implement**
 
 ```swift
 import SwiftUI
@@ -520,11 +520,11 @@ struct TroubleshootingSheet: View {
 
 Note: The copy mentions iOS 17 per spec §5.2.1. `MinimumOSVersion` in `Info.plist` is 16.0 per spec §9.3 — the iOS 17 copy is defensive (iOS 16 is a long-tail device; the sheet focuses help on the common case).
 
-- [ ] **Step 2: Verify**
+- [x] **Step 2: Verify**
 
 Tap the troubleshooting link in `SetupView`. Sheet slides up. All four bullets render. Close button dismisses.
 
-- [ ] **Step 3: Commit**
+- [x] **Step 3: Commit**
 
 ```bash
 git add ios/IPAKeyboardApp/Views/TroubleshootingSheet.swift
@@ -541,7 +541,7 @@ Content matches spec §5.2.1 verbatim."
 **Files:**
 - Create: `ios/IPAKeyboardAppUITests/SetupTabUITests.swift`
 
-- [ ] **Step 1: Implement**
+- [x] **Step 1: Implement**
 
 ```swift
 import XCTest
@@ -613,7 +613,7 @@ final class SetupTabUITests: XCTestCase {
 }
 ```
 
-- [ ] **Step 2: Wire the reset launch argument in `IPAKeyboardAppApp`**
+- [x] **Step 2: Wire the reset launch argument in `IPAKeyboardAppApp`**
 
 Add to `IPAKeyboardAppApp.swift`:
 
@@ -633,12 +633,12 @@ struct IPAKeyboardAppApp: App {
 }
 ```
 
-- [ ] **Step 3: Run UI tests**
+- [x] **Step 3: Run UI tests**
 
 Run: `xcodebuild test -project ios/IPAKeyboard.xcodeproj -scheme IPAKeyboardApp -destination 'platform=iOS Simulator,name=iPhone 15' -only-testing:IPAKeyboardAppUITests/SetupTabUITests 2>&1 | tail -20`
 Expected: 5 tests pass. First run may be slow as simulator boots.
 
-- [ ] **Step 4: Commit**
+- [x] **Step 4: Commit**
 
 ```bash
 git add ios/IPAKeyboardAppUITests/SetupTabUITests.swift \
@@ -654,14 +654,14 @@ visible post-collapse."
 
 ## Phase 5 exit checklist
 
-- [ ] `AppStateTests` — 5/5 pass
-- [ ] `SetupTabUITests` — 5/5 pass
+- [x] `AppStateTests` — 5/5 pass
+- [x] `SetupTabUITests` — 5/5 pass
 - [ ] Manual: clean install → Setup tab is default → tap "Open Settings" → lands on app's Settings page in Settings.app (iOS deep-link fallback acceptable)
 - [ ] Manual: in "Try it here" field, paste `kæt` → helper text flips to green "Looks like it’s working ✓"
 - [ ] Manual: type plain `hello` in field → helper text does NOT flip to green
 - [ ] Manual: sawIpaCharacterInTestField never un-flips after it went true, even after killing and relaunching the app
 - [ ] Manual: troubleshooting sheet reads cleanly, scrollable on iPhone SE, close dismisses
 - [ ] VoiceOver: each numbered step reads as "Step 1. Open Settings" (etc.)
-- [ ] No references to App Group in `SetupView` or `AppState` (spot-check: `grep -R 'group\.' ios/IPAKeyboardApp/` returns nothing)
+- [x] No references to App Group in `SetupView` or `AppState` (spot-check: `grep -R 'group\.' ios/IPAKeyboardApp/` returns nothing)
 
 When all boxes are ticked, tick Phase 5 in `ios/PLAN.md` and move to Phase 6.
