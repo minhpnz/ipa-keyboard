@@ -54,6 +54,7 @@
 		DEC48086AA24386FE0F73137 /* KeyRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAEDE82EC410B1CDA656F94A /* KeyRow.swift */; };
 		DF7B58EADC6612BDB46D727F /* NumbersLayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8DEC71B2909D202DC660E34 /* NumbersLayerView.swift */; };
 		E0CB147EC3974C2146AB28BB /* TroubleshootingSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4ABC563AD735B4444AE3F6D /* TroubleshootingSheet.swift */; };
+		9593065FB12C46389A639728 /* ToastModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9002B6F3ACA4B96ACF46FF9 /* ToastModifier.swift */; };
 		E1C65EC8CF787065E7D97CD6 /* KeyboardNotifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E60FF4569CDE66F9DE2F60 /* KeyboardNotifications.swift */; };
 		E235AFBBD6CD10452E1C825F /* test_symbols_iPhone15_light.1.png in Resources */ = {isa = PBXBuildFile; fileRef = A04CF4C59C6B4E2A5BB97515 /* test_symbols_iPhone15_light.1.png */; };
 		E2879E07E404A34A61786B94 /* VariantPopover.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A673FE973C632B375E80F84 /* VariantPopover.swift */; };
@@ -161,6 +162,7 @@
 		D780A807CB1F98EBD3484403 /* test_symbols_iPad_portrait_light.1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = test_symbols_iPad_portrait_light.1.png; sourceTree = "<group>"; };
 		DC957DCA5172F0369EDB430A /* IPAKeyboardExtension.appex */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = "wrapper.app-extension"; path = IPAKeyboardExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		E4ABC563AD735B4444AE3F6D /* TroubleshootingSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TroubleshootingSheet.swift; sourceTree = "<group>"; };
+		D9002B6F3ACA4B96ACF46FF9 /* ToastModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastModifier.swift; sourceTree = "<group>"; };
 		E8DEC71B2909D202DC660E34 /* NumbersLayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumbersLayerView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -375,6 +377,7 @@
 				93DD506619C5032566FD37EC /* RootTabView.swift */,
 				16E57EC4B121D8DA717569C5 /* SetupView.swift */,
 				E4ABC563AD735B4444AE3F6D /* TroubleshootingSheet.swift */,
+				D9002B6F3ACA4B96ACF46FF9 /* ToastModifier.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -586,6 +589,7 @@
 				0AC9A2BE2AE853EF8969217E /* RootTabView.swift in Sources */,
 				505BCA6A5FCA396C46D9F408 /* SetupView.swift in Sources */,
 				E0CB147EC3974C2146AB28BB /* TroubleshootingSheet.swift in Sources */,
+				9593065FB12C46389A639728 /* ToastModifier.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
