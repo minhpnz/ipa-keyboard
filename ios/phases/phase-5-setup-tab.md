@@ -657,11 +657,11 @@ visible post-collapse."
 - [x] `AppStateTests` — 5/5 pass
 - [x] `SetupTabUITests` — 5/5 pass
 - [ ] Manual: clean install → Setup tab is default → tap "Open Settings" → lands on app's Settings page in Settings.app (iOS deep-link fallback acceptable)
-- [ ] Manual: in "Try it here" field, paste `kæt` → helper text flips to green "Looks like it’s working ✓"
-- [ ] Manual: type plain `hello` in field → helper text does NOT flip to green
-- [ ] Manual: sawIpaCharacterInTestField never un-flips after it went true, even after killing and relaunching the app
-- [ ] Manual: troubleshooting sheet reads cleanly, scrollable on iPhone SE, close dismisses
-- [ ] VoiceOver: each numbered step reads as "Step 1. Open Settings" (etc.)
+- [x] Manual: in "Try it here" field, paste `kæt` → helper text flips to green "Looks like it’s working ✓"
+- [x] Manual: type plain `hello` in field → helper text does NOT flip to green
+- [x] Manual: sawIpaCharacterInTestField never un-flips after it went true, even after killing and relaunching the app
+- [x] Manual: troubleshooting sheet reads cleanly, scrollable on iPhone SE, close dismisses
+- [x] VoiceOver: each numbered step reads as "Step 1. Open Settings" (etc.)
 - [x] No references to App Group in `SetupView` or `AppState` (spot-check: `grep -R 'group\.' ios/IPAKeyboardApp/` returns nothing)
 
 When all boxes are ticked, tick Phase 5 in `ios/PLAN.md` and move to Phase 6.
