@@ -1,13 +1,9 @@
 import SwiftUI
-import UIKit
 import IPACore
 
 struct ReferenceView: View {
-    @State private var debouncer = ClipboardDebouncer()
-    @State private var toast: String? = nil
-    @State private var hideTask: DispatchWorkItem? = nil
+    @StateObject private var controller = ToastController()
 
-    /// Symbol → example, derived once from the flat SymbolReferenceData.rows.
     private static let exampleBySymbol: [String: String] = Dictionary(
         SymbolReferenceData.rows.map { ($0.symbol, $0.example) },
         uniquingKeysWith: { first, _ in first }
@@ -20,21 +16,20 @@ struct ReferenceView: View {
                     let variants = IPAMapping.variants[key] ?? []
                     Section(header: Text("Long-press the \(String(key)) key on the IPA Keyboard")) {
                         ForEach(variants, id: \.self) { symbol in
-                            Button(action: { tap(symbol) }) {
+                            Button(action: { controller.copy(symbol) }) {
                                 row(symbol: symbol)
                             }
-                            .accessibilityLabel("Copy \(symbol), \(displayName(for: symbol))")
-                            .accessibilityHint("Double-tap to copy the symbol to the clipboard")
+                            .accessibilityLabel("\(symbol), \(displayName(for: symbol))")
+                            .accessibilityHint("Copies the symbol to the clipboard")
                         }
                     }
                 }
             }
             .navigationTitle("Reference")
         }
-        .ipaToast(message: $toast)
+        .ipaToast(message: controller.message)
     }
 
-    @ViewBuilder
     private func row(symbol: String) -> some View {
         HStack(spacing: 14) {
             Text(symbol)
@@ -59,21 +54,5 @@ struct ReferenceView: View {
 
     private func displayName(for symbol: String) -> String {
         LocalizedSymbolNames.english[symbol] ?? symbol
-    }
-
-    private func tap(_ symbol: String) {
-        guard debouncer.accept(value: symbol, at: Date().timeIntervalSinceReferenceDate) else { return }
-        UIPasteboard.general.string = symbol
-        showToast("Copied \(symbol)")
-    }
-
-    private func showToast(_ msg: String) {
-        hideTask?.cancel()
-        toast = msg
-        let task = DispatchWorkItem {
-            toast = nil
-        }
-        hideTask = task
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0, execute: task)
     }
 }

@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct ToastModifier: ViewModifier {
-    @Binding var message: String?
+    let message: String?
 
     func body(content: Content) -> some View {
         ZStack(alignment: .bottom) {
@@ -19,7 +19,6 @@ struct ToastModifier: ViewModifier {
                     )
                     .padding(.bottom, 80)
                     .transition(.opacity.combined(with: .move(edge: .bottom)))
-                    .accessibilityAddTraits(.isStaticText)
                     .accessibilityLabel(message)
             }
         }
@@ -28,7 +27,7 @@ struct ToastModifier: ViewModifier {
 }
 
 extension View {
-    func ipaToast(message: Binding<String?>) -> some View {
+    func ipaToast(message: String?) -> some View {
         modifier(ToastModifier(message: message))
     }
 }

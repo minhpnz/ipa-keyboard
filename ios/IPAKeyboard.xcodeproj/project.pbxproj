@@ -55,6 +55,7 @@
 		DF7B58EADC6612BDB46D727F /* NumbersLayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8DEC71B2909D202DC660E34 /* NumbersLayerView.swift */; };
 		E0CB147EC3974C2146AB28BB /* TroubleshootingSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4ABC563AD735B4444AE3F6D /* TroubleshootingSheet.swift */; };
 		9593065FB12C46389A639728 /* ToastModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9002B6F3ACA4B96ACF46FF9 /* ToastModifier.swift */; };
+		7E5C4A2B19D4F56E832A47B0 /* ToastController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F8B6D45A3107C9E18B5D923 /* ToastController.swift */; };
 		E1C65EC8CF787065E7D97CD6 /* KeyboardNotifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E60FF4569CDE66F9DE2F60 /* KeyboardNotifications.swift */; };
 		E235AFBBD6CD10452E1C825F /* test_symbols_iPhone15_light.1.png in Resources */ = {isa = PBXBuildFile; fileRef = A04CF4C59C6B4E2A5BB97515 /* test_symbols_iPhone15_light.1.png */; };
 		E2879E07E404A34A61786B94 /* VariantPopover.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A673FE973C632B375E80F84 /* VariantPopover.swift */; };
@@ -163,6 +164,7 @@
 		DC957DCA5172F0369EDB430A /* IPAKeyboardExtension.appex */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = "wrapper.app-extension"; path = IPAKeyboardExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		E4ABC563AD735B4444AE3F6D /* TroubleshootingSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TroubleshootingSheet.swift; sourceTree = "<group>"; };
 		D9002B6F3ACA4B96ACF46FF9 /* ToastModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastModifier.swift; sourceTree = "<group>"; };
+		2F8B6D45A3107C9E18B5D923 /* ToastController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastController.swift; sourceTree = "<group>"; };
 		E8DEC71B2909D202DC660E34 /* NumbersLayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumbersLayerView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -378,6 +380,7 @@
 				16E57EC4B121D8DA717569C5 /* SetupView.swift */,
 				E4ABC563AD735B4444AE3F6D /* TroubleshootingSheet.swift */,
 				D9002B6F3ACA4B96ACF46FF9 /* ToastModifier.swift */,
+				2F8B6D45A3107C9E18B5D923 /* ToastController.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -590,6 +593,7 @@
 				505BCA6A5FCA396C46D9F408 /* SetupView.swift in Sources */,
 				E0CB147EC3974C2146AB28BB /* TroubleshootingSheet.swift in Sources */,
 				9593065FB12C46389A639728 /* ToastModifier.swift in Sources */,
+				7E5C4A2B19D4F56E832A47B0 /* ToastController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
