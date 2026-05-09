@@ -12,6 +12,7 @@ xcodebuild -project ios/IPAKeyboard.xcodeproj \
            -configuration Release \
            -destination 'generic/platform=iOS' \
            -archivePath "$ARCHIVE_DIR/app.xcarchive" \
+           -allowProvisioningUpdates \
            archive
 
 BIN="$ARCHIVE_DIR/app.xcarchive/Products/Applications/IPAKeyboardApp.app/PlugIns/IPAKeyboardExtension.appex/IPAKeyboardExtension"

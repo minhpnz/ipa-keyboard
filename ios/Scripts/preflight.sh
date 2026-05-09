@@ -111,6 +111,7 @@ else
                       -configuration Release \
                       -destination 'generic/platform=iOS' \
                       -archivePath "$ARCHIVE_DIR/app.xcarchive" \
+                      -allowProvisioningUpdates \
                       archive -quiet 2>/dev/null; then
             BIN="$ARCHIVE_DIR/app.xcarchive/Products/Applications/IPAKeyboardApp.app/PlugIns/IPAKeyboardExtension.appex/IPAKeyboardExtension"
             if [[ -f "$BIN" ]]; then
