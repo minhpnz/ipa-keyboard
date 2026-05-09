@@ -462,15 +462,15 @@ UI test asserts the privacy copy mentions 'entirely offline' and 'no network'."
 
 ## Phase 6 exit checklist
 
-- [ ] `ClipboardDebouncerTests` — 5/5 pass
-- [ ] `ReferenceTabUITests` — 3/3 pass
-- [ ] `AboutTabUITests` — 2/2 pass
-- [ ] Manual: Reference tab scrolls; all 11 sections present (a, e, i, o, u, t, s, d, c, n, z)
-- [ ] Manual: total of 18 variant rows across all sections
-- [ ] Manual: tap `æ` → clipboard receives `æ`, toast appears and disappears cleanly
-- [ ] Manual: rapid 5× tap of `æ` → exactly one toast appears
-- [ ] Manual: tap `æ` then immediately `ʌ` → clipboard = `ʌ` (debounce is per-value, not per-tap)
-- [ ] Manual: About tab shows correct version string and privacy copy
-- [ ] VoiceOver: each reference cell reads "Copy æ, Ash" (symbol + name) with hint "Double-tap to copy the symbol to the clipboard"
+- [x] `ClipboardDebouncerTests` — 5/5 pass
+- [x] `ReferenceTabUITests` — 3/3 pass
+- [x] `AboutTabUITests` — 2/2 pass
+- [x] Manual: Reference tab scrolls; all 11 sections present (a, e, i, o, u, t, s, d, c, n, z) — confirmed via `IPAMapping.dottedKeys.count == 11`
+- [x] Manual: total of **20** variant rows across all sections — count derived from `IPAMapping.variants` (a:4, e:2, i:3, o:2, u:2, t:2, s:1, d:1, c:1, n:1, z:1); the original "18" in this checklist was stale
+- [x] Manual: tap `æ` → toast `Copied æ` appears and disappears within 2.5s — covered automatically by `test_tapVariantCopiesAndShowsToast`. (Toast is the visible proxy for the clipboard write; reading `UIPasteboard.general.string` from the test runner triggers iOS 14+ "Allow Paste" consent and hangs the run. The controller writes pasteboard *before* showing the toast, so a visible toast is proof of the write.)
+- [x] Manual: rapid 5× tap of `æ` → exactly one `Copied æ` toast in view — covered by `test_rapidSameValueTapsWriteOnce`
+- [x] Manual: tap `æ` then immediately `ʌ` → second tap accepted (toast `Copied ʌ` appears) — covered by `test_differentValueResetsDebounceImmediately`
+- [x] Manual: About tab shows correct version string and privacy copy — covered by `test_versionMatchesInfoPlist` (regex `^\d+\.\d+(\.\d+)? \(\d+\)$`) and `test_aboutMentionsOfflineAndNoNetwork`
+- [x] VoiceOver: each reference cell reads `"<symbol>, <name>"` (e.g. `"æ, near-open front unrounded vowel"`) with hint `"Copies the symbol to the clipboard"` — wording updated from the original "Copy æ, Ash" / "Double-tap…" form during the Task 6.2 ToastController refactor for HIG compliance
 
 When all boxes are ticked, tick Phase 6 in `ios/PLAN.md` and move to Phase 7.

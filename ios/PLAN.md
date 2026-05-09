@@ -50,7 +50,7 @@
 - [x] Phase 3 — Long-press popover
 - [x] Phase 4 — Numbers / symbols / coach mark
 - [ ] Phase 5 — Container app: Setup tab
-- [ ] Phase 6 — Container app: Reference + About
+- [x] Phase 6 — Container app: Reference + About
 - [ ] Phase 7 — App Store criteria + CI preflight
 - [ ] Phase 8 — TestFlight + submission
 
