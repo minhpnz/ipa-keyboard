@@ -12,6 +12,7 @@
 		0BDB40EEB4951F351ABE4819 /* test_popover_a_iPhoneSE_narrow_light.1.png in Resources */ = {isa = PBXBuildFile; fileRef = 305AB77147DF720ADD9BCCAB /* test_popover_a_iPhoneSE_narrow_light.1.png */; };
 		0F755B5742AADF4005B4DFC8 /* SetupTabUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59CD7A5A465A34A75B030DAF /* SetupTabUITests.swift */; };
 		7B1FA9DC4A3E5C8B2D1F0E91 /* ReferenceTabUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B1FA9DC4A3E5C8B2D1F0E92 /* ReferenceTabUITests.swift */; };
+		8D3E7B12C9A0F4561B82E5D7 /* AboutTabUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D3E7B12C9A0F4561B82E5D8 /* AboutTabUITests.swift */; };
 		0CC089282ECA7980736BEB01 /* SnapshotTesting in Frameworks */ = {isa = PBXBuildFile; productRef = C19C99F4FB6104EDF48988FA /* SnapshotTesting */; };
 		135CE2218E607C827D1B93C2 /* test_iPad_floatingWidth_light.1.png in Resources */ = {isa = PBXBuildFile; fileRef = 7BB0BDCE4E217F3DF37714A4 /* test_iPad_floatingWidth_light.1.png */; };
 		1558C8E638FA81B2F9834136 /* KeyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5223846DC7961D7F4DB569B /* KeyView.swift */; };
@@ -133,6 +134,7 @@
 		52400F5066C92E53E471E22E /* IPAKeyboardAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IPAKeyboardAppApp.swift; sourceTree = "<group>"; };
 		59CD7A5A465A34A75B030DAF /* SetupTabUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupTabUITests.swift; sourceTree = "<group>"; };
 		7B1FA9DC4A3E5C8B2D1F0E92 /* ReferenceTabUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReferenceTabUITests.swift; sourceTree = "<group>"; };
+		8D3E7B12C9A0F4561B82E5D8 /* AboutTabUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutTabUITests.swift; sourceTree = "<group>"; };
 		5C6138BE53C2B81A624C94AD /* KeyboardExtensionSnapshotTests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = KeyboardExtensionSnapshotTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		6793FCD11491953AB9556F52 /* test_popover_a_withSelection_iPhone13_light.1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = test_popover_a_withSelection_iPhone13_light.1.png; sourceTree = "<group>"; };
 		6A673FE973C632B375E80F84 /* VariantPopover.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VariantPopover.swift; sourceTree = "<group>"; };
@@ -304,6 +306,7 @@
 			children = (
 				59CD7A5A465A34A75B030DAF /* SetupTabUITests.swift */,
 				7B1FA9DC4A3E5C8B2D1F0E92 /* ReferenceTabUITests.swift */,
+				8D3E7B12C9A0F4561B82E5D8 /* AboutTabUITests.swift */,
 			);
 			name = IPAKeyboardAppUITests;
 			path = IPAKeyboardAppUITests;
@@ -634,6 +637,7 @@
 			files = (
 				0F755B5742AADF4005B4DFC8 /* SetupTabUITests.swift in Sources */,
 				7B1FA9DC4A3E5C8B2D1F0E91 /* ReferenceTabUITests.swift in Sources */,
+				8D3E7B12C9A0F4561B82E5D7 /* AboutTabUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
