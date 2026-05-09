@@ -8,12 +8,12 @@ final class IPAMappingTests: XCTestCase {
         XCTAssertEqual(Set(IPAMapping.dottedKeys), Set("aeioutsdcnz"))
     }
 
-    func test_eighteenTotalVariants() {
-        XCTAssertEqual(IPAMapping.allVariants.count, 18)
+    func test_twentyTotalVariants() {
+        XCTAssertEqual(IPAMapping.allVariants.count, 20)
     }
 
-    func test_aMapsToThreeVariantsInOrder() {
-        XCTAssertEqual(IPAMapping.variants["a"], ["æ", "ʌ", "ɑː"])
+    func test_aMapsToFourVariantsInOrder() {
+        XCTAssertEqual(IPAMapping.variants["a"], ["æ", "ʌ", "ɑː", "ɑ"])
     }
 
     func test_everyDottedKeyHasVariants() {
