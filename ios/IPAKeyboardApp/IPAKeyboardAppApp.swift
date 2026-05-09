@@ -8,6 +8,9 @@ struct IPAKeyboardAppApp: App {
             d.removeObject(forKey: AppState.Keys.hasConfirmedSetup)
             d.removeObject(forKey: AppState.Keys.sawIpaCharacterInTestField)
         }
+        if ProcessInfo.processInfo.arguments.contains("-SkipSetupForUITests") {
+            UserDefaults.standard.set(true, forKey: AppState.Keys.hasConfirmedSetup)
+        }
     }
     var body: some Scene {
         WindowGroup { RootTabView() }
