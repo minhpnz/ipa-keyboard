@@ -642,13 +642,13 @@ without dragging the whole spec open each time."
 
 ## Phase 7 exit checklist
 
-- [ ] Both `.entitlements` files contain only `<dict/>`; grep confirms no forbidden capability keys
-- [ ] Extension `Info.plist` contains all required keys from spec §9.3 verbatim
-- [ ] `PrivacyInfo.xcprivacy` present in both targets (identical content, CA92.1 declared)
-- [ ] Forbidden-API grep is clean in `ios/IPAKeyboardExtension/`
-- [ ] `ios/Scripts/preflight.sh` exits 0 end-to-end (size check may be skipped locally if no device signing)
-- [ ] `ios/Scripts/baseline-sizes.json` committed and reasonable (< 4 MB)
-- [ ] `docs/ios/submission-checklist.md`, `docs/ios/manual-test-checklist.md`, `docs/ios/review-notes.md`, `docs/ios/README.md` all present
-- [ ] `xcodebuild archive` succeeds (even if signing is personal-team) — this proves the privacy manifest + entitlements are consistent
+- [x] Both `.entitlements` files contain only `<dict/>`; grep confirms no forbidden capability keys (Task 7.1)
+- [x] Extension `Info.plist` contains all required keys from spec §9.3 verbatim (Task 7.2)
+- [x] `PrivacyInfo.xcprivacy` present in both targets (identical content, CA92.1 declared) (Task 7.3)
+- [x] Forbidden-API grep is clean in `ios/IPAKeyboardExtension/` (Task 7.4)
+- [x] `ios/Scripts/preflight.sh` exits 0 end-to-end with `SKIP_SIZE_CHECK=1` (size guard intentionally skipped locally; see deferred items below) — also fixed two stale `IPAMappingTests` assertions surfaced by guard 8 (Task 7.5)
+- [ ] **Deferred** — `ios/Scripts/baseline-sizes.json` committed and reasonable (< 4 MB). Blocked on `DEVELOPMENT_TEAM`: `update-baseline.sh` archives with `xcodebuild archive`, which fails with "Signing for IPAKeyboardApp requires a development team" until Apple ID is configured in Xcode and `DEVELOPMENT_TEAM` is set in `project.yml` (or via per-machine override). Same blocker as Phase 5's Open Settings deep-link verification — closes together once signing works.
+- [x] `docs/ios/submission-checklist.md`, `docs/ios/manual-test-checklist.md`, `docs/ios/review-notes.md`, `docs/ios/README.md` all present (Task 7.6)
+- [ ] **Deferred** — `xcodebuild archive` succeeds (even with personal team) — this proves the privacy manifest + entitlements are consistent end-to-end. Same `DEVELOPMENT_TEAM` blocker as the size baseline above.
 
-When all boxes are ticked, tick Phase 7 in `ios/PLAN.md` and move to Phase 8.
+When all boxes are ticked, tick Phase 7 in `ios/PLAN.md` and move to Phase 8. The two **Deferred** items above remain open pending Apple ID signing setup; Phase 7 stays unticked in `PLAN.md` until those land.
