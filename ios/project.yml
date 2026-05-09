@@ -81,6 +81,19 @@ targets:
     dependencies:
       - target: IPAKeyboardApp
 
+  IPAKeyboardAppUITests:
+    type: bundle.ui-testing
+    platform: iOS
+    sources:
+      - path: IPAKeyboardAppUITests
+    settings:
+      base:
+        IPHONEOS_DEPLOYMENT_TARGET: "16.0"
+        GENERATE_INFOPLIST_FILE: YES
+        TEST_TARGET_NAME: IPAKeyboardApp
+    dependencies:
+      - target: IPAKeyboardApp
+
   KeyboardExtensionSnapshotTests:
     type: bundle.unit-test
     platform: iOS
@@ -111,3 +124,4 @@ schemes:
       targets:
         - IPAKeyboardAppTests
         - KeyboardExtensionSnapshotTests
+        - IPAKeyboardAppUITests

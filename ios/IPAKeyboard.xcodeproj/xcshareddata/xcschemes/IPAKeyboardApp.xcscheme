@@ -76,10 +76,11 @@
             </BuildableReference>
          </TestableReference>
          <TestableReference
-            skipped = "NO">
+            skipped = "NO"
+            parallelizable = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "79DB824AA827FA923EE1F908"
+               BlueprintIdentifier = "8B289ECFA582BE9551F63687"
                BuildableName = "IPAKeyboardAppUITests.xctest"
                BlueprintName = "IPAKeyboardAppUITests"
                ReferencedContainer = "container:IPAKeyboard.xcodeproj">
