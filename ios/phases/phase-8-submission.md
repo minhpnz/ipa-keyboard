@@ -137,6 +137,16 @@ Same list, but watch for: keyboard adapts to iPad width, the floating (iPad) key
 
 ## Task 8.4 — External TestFlight beta (≥1 week)
 
+> **v1 decision (2026-05-11): SKIPPED.** Solo developer with no external
+> testers available. The ≥1-week external beta exists in the spec as a
+> quality bar; with "external = also you" the week of delay buys zero new
+> information beyond what internal smoke testing on the developer's iPhone
+> already produced (Task 8.3, build 2). External group + Beta App Review
+> submission were set up in ASC (so the infrastructure exists for v1.1+
+> when testers can be recruited), but the beta was not run to completion
+> before Task 8.7. Build 2's smoke pass on iPhone 11 / iOS 18.7 is the
+> v1 quality gate.
+
 **Files:**
 - No code changes in this task.
 
