@@ -4,7 +4,7 @@ Paste this text into App Store Connect → App Review Information → Notes (req
 
 ---
 
-IPA Keyboard is an alternate iOS keyboard for typing IPA (International
+IPA Typing Keyboard is an alternate iOS keyboard for typing IPA (International
 Phonetic Alphabet) symbols, for linguistics students and researchers.
 
 Fully offline — no network, no accounts, no data collection, no analytics.
@@ -19,7 +19,7 @@ HOW TO TEST
   2. On the Setup tab, tap "Open Settings".
   3. In Settings: General → Keyboard → Keyboards → Add New Keyboard → IPA Keyboard.
      (Do NOT enable Full Access — the keyboard does not use it.)
-  4. Return to our app. Tap the "Try it here" field, press 🌐, switch to IPA Keyboard.
+  4. Return to our app. Tap the "Try it here" field, press 🌐, switch to IPA Typing Keyboard.
   5. Long-press any of the dotted letters (a e i o u t s d c n z) to choose an IPA variant.
   6. Verify typing works in any app with a text field.
 

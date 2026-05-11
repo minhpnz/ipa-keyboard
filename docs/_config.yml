@@ -1,0 +1,9 @@
+title: IPA Typing Keyboard
+description: A privacy-focused iOS keyboard for typing International Phonetic Alphabet symbols.
+theme: jekyll-theme-minimal
+
+# Internal planning docs under docs/ios/ are NOT published. Only the
+# pages explicitly listed below (or in this directory's root) are public.
+exclude:
+  - ios/
+  - README.md
