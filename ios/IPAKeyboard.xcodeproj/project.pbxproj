@@ -49,6 +49,7 @@
 		AD2B3BCC65C8A532786AAFE1 /* KeyboardRootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C932A31D5C02A418CB9F797 /* KeyboardRootView.swift */; };
 		B3DC54826B5E240DA3656763 /* KeyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5223846DC7961D7F4DB569B /* KeyView.swift */; };
 		C0F6299D2FBA08DF35C6860D /* PopoverSnapshotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF602E4A217F46113C558105 /* PopoverSnapshotTests.swift */; };
+		C502F5F99B56066D51D33BA3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4D05F4B87B2D7F0D6113DA45 /* Assets.xcassets */; };
 		C811BDC4CE0B91A69AD931A5 /* test_iPhone15_portrait_light.1.png in Resources */ = {isa = PBXBuildFile; fileRef = 38DCA174111C492DCD2E14BF /* test_iPhone15_portrait_light.1.png */; };
 		CB57035D46F33CB369F9451C /* NumbersLayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8DEC71B2909D202DC660E34 /* NumbersLayerView.swift */; };
 		CBC350492CFF0B9B6521F4D9 /* KeyboardNotifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E60FF4569CDE66F9DE2F60 /* KeyboardNotifications.swift */; };
@@ -133,6 +134,7 @@
 		3AC1BBD0DDB2B559A07C4AAE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		40A11B67C23A94CF4366A196 /* test_iPad_portrait_light.1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = test_iPad_portrait_light.1.png; sourceTree = "<group>"; };
 		42BEEB009B77F63DB737ABCE /* IPAKeyboardApp.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = IPAKeyboardApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		4D05F4B87B2D7F0D6113DA45 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		52400F5066C92E53E471E22E /* IPAKeyboardAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IPAKeyboardAppApp.swift; sourceTree = "<group>"; };
 		5531652F138F28E58EA7E5FB /* ReferenceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReferenceView.swift; sourceTree = "<group>"; };
 		5ACBE8C530D1F1EB016A0229 /* ToastController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastController.swift; sourceTree = "<group>"; };
@@ -263,6 +265,7 @@
 			children = (
 				89937F9131E9BCE977A10470 /* Views */,
 				0C1EDA805F71444FB187BF8A /* AppState.swift */,
+				4D05F4B87B2D7F0D6113DA45 /* Assets.xcassets */,
 				CD9C8F8ED919FC02690CD55F /* ContentView.swift */,
 				3AC1BBD0DDB2B559A07C4AAE /* Info.plist */,
 				19B5C1426F5806C263218151 /* IPAKeyboardApp.entitlements */,
@@ -544,6 +547,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C502F5F99B56066D51D33BA3 /* Assets.xcassets in Resources */,
 				60B9834928E82755FAA6C59C /* PrivacyInfo.xcprivacy in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -702,7 +706,7 @@
 		186549984D2D9BDFE447FDCE /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = "";
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = IPAKeyboardApp/IPAKeyboardApp.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = IPAKeyboardApp/Info.plist;
@@ -909,7 +913,7 @@
 		BF4F86EB8776940F8BA58063 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = "";
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = IPAKeyboardApp/IPAKeyboardApp.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = IPAKeyboardApp/Info.plist;
