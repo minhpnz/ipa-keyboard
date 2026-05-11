@@ -25,7 +25,10 @@ public enum LayoutEngine {
     }
 
     /// Compute the popover frame so it is fully inside `keyboardBounds`.
-    /// Preference order: above-and-centered → below-and-centered → clamp horizontally.
+    /// Preference order: above-and-centered → clamp to keyboard top (overlap the
+    /// key) for top-row keys. Never below — placing the popover below the key
+    /// hides the variants behind the next row, which is the exact bug TestFlight
+    /// build 1 exhibited for E/T/U/I/O (Phase 8 feedback, 2026-05-11).
     public static func popoverRect(
         keyFrame: CGRect,
         popoverSize: CGSize,
@@ -33,13 +36,8 @@ public enum LayoutEngine {
     ) -> CGRect {
         let padding = popoverPadding
 
-        // Vertical: try above; mirror below if above would clip.
-        // Then clamp so the popover always lies within keyboardBounds —
-        // covers the case where neither above nor below fully fits.
         let aboveY = keyFrame.minY - popoverSize.height - padding
-        let belowY = keyFrame.maxY + padding
-        var y: CGFloat = aboveY >= keyboardBounds.minY ? aboveY : belowY
-        if y < keyboardBounds.minY { y = keyboardBounds.minY }
+        var y: CGFloat = aboveY >= keyboardBounds.minY ? aboveY : keyboardBounds.minY
         if y + popoverSize.height > keyboardBounds.maxY {
             y = keyboardBounds.maxY - popoverSize.height
         }

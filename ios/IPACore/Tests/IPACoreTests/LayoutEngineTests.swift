@@ -76,8 +76,11 @@ final class LayoutEngineTests: XCTestCase {
         }
     }
 
-    // Top row — popover would clip top if placed above; must mirror below.
-    func test_popoverMirrorsBelowWhenTopRowWouldClip() {
+    // Top row — popover would clip top if placed above. Must clamp to keyboard
+    // top (overlapping the key), NOT mirror below. Mirroring below hides the
+    // popover behind the next row of keys, which is the exact bug TestFlight
+    // build 1 showed for E/T/U/I/O (Phase 8 feedback, 2026-05-11).
+    func test_popoverClampsToTopWhenTopRowWouldClipAbove() {
         let keyFrame = CGRect(x: 160, y: 2, width: 32, height: 48)
         let popoverSize = CGSize(width: 120, height: 52)
         let keyboardSize = CGSize(width: 390, height: 260)
@@ -88,8 +91,10 @@ final class LayoutEngineTests: XCTestCase {
             keyboardBounds: CGRect(origin: .zero, size: keyboardSize)
         )
 
-        XCTAssertGreaterThanOrEqual(rect.minY, keyFrame.maxY,
-            "Popover should mirror below when placing above would clip")
+        XCTAssertEqual(rect.minY, 0, accuracy: 0.5,
+            "Top-row popover must clamp to keyboard top, not mirror below")
+        XCTAssertLessThan(rect.minY, keyFrame.maxY,
+            "Popover must never sit below the key — that hides it behind row 2")
     }
 
     // Tall popover that can't fit above OR below a short keyboard must still

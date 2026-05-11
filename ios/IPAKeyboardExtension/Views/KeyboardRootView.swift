@@ -88,7 +88,9 @@ struct KeyboardRootView: View {
 
     private func cancelInFlightGesture() {
         touch.cancel()
-        popoverKey = nil
+        withAnimation(.easeOut(duration: 0.1)) {
+            popoverKey = nil
+        }
         popoverVariants = []
         popoverSelection = nil
     }
@@ -187,7 +189,10 @@ struct KeyboardRootView: View {
             popoverSelection = nil
             DispatchQueue.main.asyncAfter(deadline: .now() + LayoutEngine.popoverDelay) {
                 if touch.shouldShowPopover(for: token) {
-                    popoverKey = key
+                    withAnimation(.easeOut(duration: 0.12)) {
+                        popoverKey = key
+                    }
+                    HapticsService.shared.selection()
                 }
             }
         }
@@ -204,7 +209,11 @@ struct KeyboardRootView: View {
         ).origin
         let relX = point.x - origin.x
         let index = Int(relX / LayoutEngine.popoverBucketWidth)
-        popoverSelection = (0..<variantCount).contains(index) ? index : nil
+        let newSelection = (0..<variantCount).contains(index) ? index : nil
+        if newSelection != popoverSelection {
+            popoverSelection = newSelection
+            if newSelection != nil { HapticsService.shared.selection() }
+        }
     }
 
     private func endPress() {
@@ -217,7 +226,9 @@ struct KeyboardRootView: View {
             onInsertText(s)
             if isShifted { isShifted = false }
         }
-        popoverKey = nil
+        withAnimation(.easeOut(duration: 0.1)) {
+            popoverKey = nil
+        }
         popoverVariants = []
         popoverSelection = nil
         touch.cancel()

@@ -56,9 +56,13 @@ final class PopoverSnapshotTests: XCTestCase {
                        as: .image(on: .iPhone13, traits: .init(userInterfaceStyle: .light)))
     }
 
-    // MARK: - Right-edge + top-row: 'o' on iPhone 13 (row 1 → mirrors below).
+    // MARK: - Right-edge + top-row: 'o' on iPhone 13 (row 1 → clamps to top).
     // Row 1 keys can't fit the popover above (would clip top), so LayoutEngine
-    // mirrors below; near the right edge it also clamps left.
+    // clamps to keyboardBounds.minY — the popover overlaps the key rather than
+    // mirroring below, which would hide it behind row 2 (Phase 8 bug fix,
+    // build 1 → 2, 2026-05-11). Near the right edge it also clamps left.
+    // NOTE: baseline image needs regeneration after this change — set
+    // `isRecording = true` once locally, rerun, then turn it back off.
     func test_popover_rightEdge_o_topRow_iPhone13_light() {
         let view = compose(
             size: CGSize(width: 393, height: 260),
