@@ -51,7 +51,7 @@
 - [x] Phase 4 — Numbers / symbols / coach mark
 - [ ] Phase 5 — Container app: Setup tab
 - [x] Phase 6 — Container app: Reference + About
-- [ ] Phase 7 — App Store criteria + CI preflight
+- [x] Phase 7 — App Store criteria + CI preflight
 - [ ] Phase 8 — TestFlight + submission
 
 Mark each phase as done by ticking the box above **and** confirming every `- [ ]` in the phase file is ticked.
