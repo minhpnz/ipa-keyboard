@@ -40,26 +40,11 @@ developer.apple.com → Certificates, Identifiers & Profiles → Identifiers →
 
 The "no capabilities" choice is load-bearing — any checkbox you tick here has to be matched by an entitlements entry, and our entitlements are empty (spec §9.2).
 
-- [ ] **Step 3: Flip both targets to Manual signing + Distribution profile**
+- [x] **Step 3: Flip both targets to Manual signing + Distribution profile** — **Skipped for v1, documented deviation from spec.**
 
-In Xcode for each target (container + extension):
+  Decision (2026-05-11): keep `CODE_SIGN_STYLE: Automatic` with `DEVELOPMENT_TEAM: 3KD4T7N5X8`. For a solo developer doing manual archives via Xcode Organizer, automatic signing creates the Apple Distribution cert and the App Store provisioning profiles at archive-export time (same flow that successfully created the dev cert + profiles in Phase 7). The Manual path is preferred for CI / multi-developer workflows because it's more deterministic and reproducible; we have neither today. Revisit if/when this project gets a CI archive job or a second developer.
 
-- Signing & Capabilities → uncheck "Automatically manage signing"
-- Team → your paid Apple Developer team
-- Provisioning Profile → create a new App Store profile in the Developer portal for each bundle ID, download, and select it here
-- Signing Certificate → "Apple Distribution"
-
-- [ ] **Step 4: Bump marketing + build version**
-
-In each target's General tab:
-- Version: `1.0.0`
-- Build: `1`
-
-Commit:
-```bash
-git add ios/IPAKeyboard.xcodeproj
-git commit -m "chore(ios): set v1.0.0 build 1 + distribution signing"
-```
+- [x] **Step 4: Bump marketing + build version** — `MARKETING_VERSION: "1.0.0"` and `CURRENT_PROJECT_VERSION: "1"` already set in `project.yml` since Phase 1. No change needed.
 
 ---
 
