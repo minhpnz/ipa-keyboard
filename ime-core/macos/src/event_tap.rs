@@ -289,12 +289,11 @@ unsafe extern "C" fn tap_callback(
                     // the Ctrl modifier state from the suppressed Ctrl+letter
                     // event can bleed into our injected events.
                     std::thread::sleep(std::time::Duration::from_millis(10));
-                    // Paste-based injection bypasses the active IME entirely.
-                    // VietX/Telex and other Vietnamese IMEs would intercept
-                    // a Unicode-string keyboard event and drop the IPA char
-                    // as non-Vietnamese; clipboard paste isn't routed through
-                    // the IME pipeline so the chars land verbatim.
-                    injector::paste_text(&plan.text);
+                    // AX-based injection: writes directly to the focused UI
+                    // element via the Accessibility API. Bypasses both the
+                    // IME pipeline (so VietX/Telex can't intercept) and the
+                    // clipboard (so the user's Cmd+C content is untouched).
+                    injector::insert_text(&plan.text);
                     // Only the IPA portion is what a subsequent in-timeout
                     // cycle needs to backspace. Counting `plan.text` would
                     // over-count if the plan ever prepends/appends extra

@@ -1,6 +1,6 @@
 [package]
 name = "ipa-keyboard"
-version = "0.1.0"
+version = "0.1.1"
 description = "IPA Keyboard - International Phonetic Alphabet typing tool"
 authors = ["minhphan"]
 edition = "2021"

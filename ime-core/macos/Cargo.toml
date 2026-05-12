@@ -1,6 +1,6 @@
 [package]
 name = "ipa-keyboard-daemon"
-version = "0.1.0"
+version = "0.1.1"
 edition = "2021"
 description = "System-wide IPA input via CGEvent tap (macOS)"
 

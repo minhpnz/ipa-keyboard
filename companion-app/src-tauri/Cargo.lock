@@ -1791,7 +1791,7 @@ dependencies = [
 
 [[package]]
 name = "ipa-keyboard"
-version = "0.1.0"
+version = "0.1.1"
 dependencies = [
  "ipa-keyboard-daemon",
  "ipa-mapping-engine",
@@ -1807,7 +1807,7 @@ dependencies = [
 
 [[package]]
 name = "ipa-keyboard-daemon"
-version = "0.1.0"
+version = "0.1.1"
 dependencies = [
  "core-foundation",
  "core-graphics 0.24.0",

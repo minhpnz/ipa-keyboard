@@ -16,7 +16,7 @@
 set -euo pipefail
 
 REPO_ROOT="$(cd "$(dirname "$0")/.." && pwd)"
-VERSION="0.1.0"
+VERSION="0.1.1"
 RELEASE_DIR="$REPO_ROOT/package-release"
 BINARIES_DIR="$REPO_ROOT/companion-app/src-tauri/binaries"
 
